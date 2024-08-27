@@ -1,0 +1,37 @@
+<section id="Tage">
+    <h2>Tage zwischen Daten</h2>
+    <form id="Tage-date-form" name="Tage-date-form">
+        <label for="start-date">
+            <input type="date" required id="Tage-start-date" name="start-date">
+            <span class="input_label">von</span>
+        </label>
+        <label for="end-date">
+            <input type="date" required id="Tage-end-date" name="end-date">
+            <span class="input_label">bis</span>
+        </label>
+        <button type="submit" id="Tage-button-calc">Berechnen</button>
+        <label for="include-start" data-style="no-border">(
+            <input type="checkbox" name="include-start" id="Tage-include-start">
+            inkl. Starttag )
+        </label>
+    </form>
+    <h2>Ergebnis:</h2>
+    <result id="Tage-result" class="result-fullsize">
+        <table id="Tage-results-table" class="all-borders">
+            <thead>
+                <tr>
+                    <th>von</th>
+                    <th>bis</th>
+                    <th>Tage</th>
+                    <th>ohne Wochenenden</th>
+                    <th>ohne Feiertage</th>
+                    <th>ohne WE & FT</th>
+                    <th>inkl. Starttag</th>
+                </tr>
+            </thead>
+            <tbody id="results-body">
+                <!-- Additional rows can be added dynamically using JavaScript -->
+            </tbody>
+        </table>
+    </result>
+</section>

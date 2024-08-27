@@ -1,0 +1,26 @@
+[
+    {
+        "ID": "Tage",
+        "Name": "Tage zwischen Daten",
+        "Link": "./assets/templates/Tage.html",
+        "Script": "./assets/js/Tage.js"
+    },
+    {
+        "ID": "Fristen",
+        "Name": "Fristenrechner",
+        "Link": "./assets/templates/Fristen.html",
+        "Script": "./assets/js/Fristen.js"
+    },
+    {
+        "ID": "Mutterschutz",
+        "Name": "Mutterschutz",
+        "Link": "./assets/templates/Mutterschutz.html",
+        "Script": "./assets/js/Mutterschutz.js"
+    },
+    {
+        "ID": "Jugendhilfe",
+        "Name": "Jugendhilfe",
+        "Link": "./assets/templates/Jugendhilfe.html",
+        "Script": "./assets/js/Jugendhilfe.js"
+    }
+]
