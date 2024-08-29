@@ -1,0 +1,214 @@
+﻿{
+    "Auswahl": [
+        {
+            "Land": "Australien",
+            "Waehrung": "AUD",
+            "Zeitreihe": "BBEX3.A.AUD.EUR.BB.AC.A04"
+        },
+        {
+            "Land": "Bulgarien",
+            "Waehrung": "BGN",
+            "Zeitreihe": "BBEX3.A.BGN.EUR.BB.AC.A04"
+        },
+        {
+            "Land": "Brasilien",
+            "Waehrung": "BRL",
+            "Zeitreihe": "BBEX3.A.BRL.EUR.BB.AC.A04"
+        },
+        {
+            "Land": "Kanada",
+            "Waehrung": "CAD",
+            "Zeitreihe": "BBEX3.A.CAD.EUR.BB.AC.A04"
+        },
+        {
+            "Land": "Schweiz",
+            "Waehrung": "CHF",
+            "Zeitreihe": "BBEX3.A.CHF.EUR.BB.AC.A04"
+        },
+        {
+            "Land": "China",
+            "Waehrung": "CNY",
+            "Zeitreihe": "BBEX3.A.CNY.EUR.BB.AC.A04"
+        },
+        {
+            "Land": "Zypern / bis 2007",
+            "Waehrung": "CYP",
+            "Zeitreihe": "BBEX3.A.CYP.EUR.BB.AC.A04"
+        },
+        {
+            "Land": "Tschechien",
+            "Waehrung": "CZK",
+            "Zeitreihe": "BBEX3.A.CZK.EUR.BB.AC.A04"
+        },
+        {
+            "Land": "Dänemark",
+            "Waehrung": "DKK",
+            "Zeitreihe": "BBEX3.A.DKK.EUR.BB.AC.A04"
+        },
+        {
+            "Land": "Estland / bis 2010",
+            "Waehrung": "EEK",
+            "Zeitreihe": "BBEX3.A.EEK.EUR.BB.AC.A04"
+        },
+        {
+            "Land": "Vereinigtes Königreich",
+            "Waehrung": "GBP",
+            "Zeitreihe": "BBEX3.A.GBP.EUR.BB.AC.A04"
+        },
+        {
+            "Land": "Griechenland / bis 2000",
+            "Waehrung": "GRD",
+            "Zeitreihe": "BBEX3.A.GRD.EUR.BB.AC.A04"
+        },
+        {
+            "Land": "Hongkong",
+            "Waehrung": "HKD",
+            "Zeitreihe": "BBEX3.A.HKD.EUR.BB.AC.A04"
+        },
+        {
+            "Land": "Kroatien / bis 2022",
+            "Waehrung": "HRK",
+            "Zeitreihe": "BBEX3.A.HRK.EUR.BB.AC.A04"
+        },
+        {
+            "Land": "Ungarn",
+            "Waehrung": "HUF",
+            "Zeitreihe": "BBEX3.A.HUF.EUR.BB.AC.A04"
+        },
+        {
+            "Land": "Indonesien",
+            "Waehrung": "IDR",
+            "Zeitreihe": "BBEX3.A.IDR.EUR.BB.AC.A04"
+        },
+        {
+            "Land": "Israel",
+            "Waehrung": "ILS",
+            "Zeitreihe": "BBEX3.A.ILS.EUR.BB.AC.A04"
+        },
+        {
+            "Land": "Indien",
+            "Waehrung": "INR",
+            "Zeitreihe": "BBEX3.A.INR.EUR.BB.AC.A04"
+        },
+        {
+            "Land": "Island",
+            "Waehrung": "ISK",
+            "Zeitreihe": "BBEX3.A.ISK.EUR.BB.AC.A04"
+        },
+        {
+            "Land": "Japan",
+            "Waehrung": "JPY",
+            "Zeitreihe": "BBEX3.A.JPY.EUR.BB.AC.A04"
+        },
+        {
+            "Land": "Korea, Republik",
+            "Waehrung": "KRW",
+            "Zeitreihe": "BBEX3.A.KRW.EUR.BB.AC.A04"
+        },
+        {
+            "Land": "Litauen / bis 2014",
+            "Waehrung": "LTL",
+            "Zeitreihe": "BBEX3.A.LTL.EUR.BB.AC.A04"
+        },
+        {
+            "Land": "Lettland / bis 2013",
+            "Waehrung": "LVL",
+            "Zeitreihe": "BBEX3.A.LVL.EUR.BB.AC.A04"
+        },
+        {
+            "Land": "Malta / bis 2007",
+            "Waehrung": "MTL",
+            "Zeitreihe": "BBEX3.A.MTL.EUR.BB.AC.A04"
+        },
+        {
+            "Land": "Mexiko",
+            "Waehrung": "MXN",
+            "Zeitreihe": "BBEX3.A.MXN.EUR.BB.AC.A04"
+        },
+        {
+            "Land": "Malaysia",
+            "Waehrung": "MYR",
+            "Zeitreihe": "BBEX3.A.MYR.EUR.BB.AC.A04"
+        },
+        {
+            "Land": "Norwegen",
+            "Waehrung": "NOK",
+            "Zeitreihe": "BBEX3.A.NOK.EUR.BB.AC.A04"
+        },
+        {
+            "Land": "Neuseeland",
+            "Waehrung": "NZD",
+            "Zeitreihe": "BBEX3.A.NZD.EUR.BB.AC.A04"
+        },
+        {
+            "Land": "Philippinen",
+            "Waehrung": "PHP",
+            "Zeitreihe": "BBEX3.A.PHP.EUR.BB.AC.A04"
+        },
+        {
+            "Land": "Polen",
+            "Waehrung": "PLN",
+            "Zeitreihe": "BBEX3.A.PLN.EUR.BB.AC.A04"
+        },
+        {
+            "Land": "Rumänien / bis 2004",
+            "Waehrung": "ROL",
+            "Zeitreihe": "BBEX3.A.ROL.EUR.BB.AC.A04"
+        },
+        {
+            "Land": "Rumänien / ab 2005",
+            "Waehrung": "RON",
+            "Zeitreihe": "BBEX3.A.RON.EUR.BB.AC.A04"
+        },
+        {
+            "Land": "Russische Föderation",
+            "Waehrung": "RUB",
+            "Zeitreihe": "BBEX3.A.RUB.EUR.BB.AC.A04"
+        },
+        {
+            "Land": "Schweden",
+            "Waehrung": "SEK",
+            "Zeitreihe": "BBEX3.A.SEK.EUR.BB.AC.A04"
+        },
+        {
+            "Land": "Singapur",
+            "Waehrung": "SGD",
+            "Zeitreihe": "BBEX3.A.SGD.EUR.BB.AC.A04"
+        },
+        {
+            "Land": "Slowenien / bis 2006",
+            "Waehrung": "SIT",
+            "Zeitreihe": "BBEX3.A.SIT.EUR.BB.AC.A04"
+        },
+        {
+            "Land": "Slowakei / bis 2008",
+            "Waehrung": "SKK",
+            "Zeitreihe": "BBEX3.A.SKK.EUR.BB.AC.A04"
+        },
+        {
+            "Land": "Thailand",
+            "Waehrung": "THB",
+            "Zeitreihe": "BBEX3.A.THB.EUR.BB.AC.A04"
+        },
+        {
+            "Land": "Türkei / bis 2004",
+            "Waehrung": "TRL",
+            "Zeitreihe": "BBEX3.A.TRL.EUR.BB.AC.A04"
+        },
+        {
+            "Land": "Türkei / ab 2005",
+            "Waehrung": "TRY",
+            "Zeitreihe": "BBEX3.A.TRY.EUR.BB.AC.A04"
+        },
+        {
+            "Land": "Vereinigte Staaten",
+            "Waehrung": "USD",
+            "Zeitreihe": "BBEX3.A.USD.EUR.BB.AC.A04"
+        },
+        {
+            "Land": "Südafrika",
+            "Waehrung": "ZAR",
+            "Zeitreihe": "BBEX3.A.ZAR.EUR.BB.AC.A04"
+        }
+    ]
+}
