@@ -22,5 +22,11 @@
         "Name": "Jugendhilfe",
         "Link": "./assets/templates/Jugendhilfe.html",
         "Script": "./assets/js/Jugendhilfe.js"
+    },
+    {
+        "ID": "JahresentgeltAusland",
+        "Name": "Jahresentgelt für Nicht-Euro-Länder",
+        "Link": "./assets/templates/JahresentgeltAusland.html",
+        "Script": "./assets/js/JahresentgeltAusland.js"
     }
 ]
