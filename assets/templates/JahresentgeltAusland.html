@@ -3,13 +3,18 @@
     <form id="JahresentgeltAusland-form" name="JahresentgeltAusland-form">
         <label for="JahresentgeltAusland-land">
             <input type="text" required name="JahresentgeltAusland-land" id="JahresentgeltAusland-land"
-                list="JahresentgeltAusland-laender" placeholder="Land">
+                list="JahresentgeltAusland-laender" placeholder="Land" title="Land aus Liste oder eintippen">
             <span class="input_label">Land</span>
         </label>
         <label for="JahresentgeltAusland-jahr">
             <input type="text" required name="JahresentgeltAusland-jahr" id="JahresentgeltAusland-jahr"
-                list="JahresentgeltAusland-jahre" placeholder="2001">
+                list="JahresentgeltAusland-jahre" placeholder="2001" title="Jahr der Bescheinigung angeben">
             <span class="input_label">Jahr</span>
+        </label>
+        <label for="JahresentgeltAusland-entgelt">
+            <input type="number" required name="JahresentgeltAusland-entgelt" id="JahresentgeltAusland-entgelt"
+                placeholder="0,00" title="Entgelt laut Bescheinigung">
+            <span class="input_label">Entgelt</span>
         </label>
         <button type="submit" id="JahresentgeltAusland-submit-button">Berechnen</button>
         <!-- datalists will be filled dynamically with JS -->
@@ -17,5 +22,5 @@
         <datalist id="JahresentgeltAusland-jahre"></datalist>
     </form>
     <h2>Ergebnis:</h2>
-    <result id="JahresentgeltAusland-result" class="result-fullsize"></result>
+    <result id="JahresentgeltAusland-result" class="result-fullsize">Entgelt in Euro</result>
 </section>
