@@ -56,7 +56,8 @@ async function init_JahresentgeltAusland() {
 init_JahresentgeltAusland();
 // temporal function, will be splitted
 async function fetch_Bundesbank(land) {
-  let url = JahresentgeltAusland_api_url + JahresentgeltAusland_zeitreihen[land].Waehrung + JahresentgeltAusland_api_url_appendix;
+  let waehrung = JahresentgeltAusland_zeitreihen[land].Waehrung;
+  let url = JahresentgeltAusland_api_url + waehrung + JahresentgeltAusland_api_url_appendix;
   let xml;
   JahresentgeltAusland_Land.name = land;
   JahresentgeltAusland_Land.jahreswerte = [];
@@ -83,8 +84,8 @@ async function fetch_Bundesbank(land) {
       let kurs = entry.wert;
       let entgelt_fremd = JahresentgeltAusland_input_entgelt.value;
       let entgelt_euro = Number(entgelt_fremd) / Number(kurs)
-      let result_text = `der aktuelle Kurs ist: ${kurs}. Das heißt es gibt für 1,00 € ${kurs} ${JahresentgeltAusland_aktuelles_land.Waehrung}.
-      Somit ergibt sich bei einem Entgelt von ${entgelt_fremd.toFixed(2)} ${JahresentgeltAusland_aktuelles_land.Waehrung} ein Entgelt in Euro von ${entgelt_euro.toFixed(2)}.`;
+      let result_text = `der aktuelle Kurs ist: ${kurs}. Das heißt es gibt für 1,00 € ${kurs} ${waehrung}.
+      Somit ergibt sich bei einem Entgelt von ${entgelt_fremd.toFixed(2)} ${waehrung} ein Entgelt in Euro von ${entgelt_euro.toFixed(2)}.`;
       JahresentgeltAusland_result.innerHTML = result_text;
 
     });
