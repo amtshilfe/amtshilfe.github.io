@@ -84,11 +84,13 @@ async function fetch_Bundesbank(land) {
       let entgelt_fremd = JahresentgeltAusland_input_entgelt.value;
       let entgelt_euro = Number(entgelt_fremd) / Number(kurs)
       let result_text = `der aktuelle Kurs ist: ${kurs}. Das heißt es gibt für 1,00 € ${kurs} ${JahresentgeltAusland_aktuelles_land.Waehrung}.
-      Somit ergibt sich bei einem Entgelt von ${(Math.round(entgelt_fremd * 100) / 100).toFixed(2)} ${JahresentgeltAusland_aktuelles_land.Waehrung} ein Entgelt in Euro von ${(Math.round(entgelt_euro * 100) / 100).toFixed(2)}.`;
+      Somit ergibt sich bei einem Entgelt von ${entgelt_fremd.toFixed(2)} ${JahresentgeltAusland_aktuelles_land.Waehrung} ein Entgelt in Euro von ${entgelt_euro.toFixed(2)}.`;
       JahresentgeltAusland_result.innerHTML = result_text;
 
     });
 }
+
+
 async function fetch_Bundesbank_data(land) {
   let url = JahresentgeltAusland_api_url + JahresentgeltAusland_zeitreihen[land].Waehrung + JahresentgeltAusland_api_url_appendix;
   let xml;
