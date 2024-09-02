@@ -23,8 +23,8 @@ const JahresentgeltAusland_api_url_appendix = ".EUR.BB.AC.A04%20?&detail=dataonl
 async function init_JahresentgeltAusland() {
   JahresentgeltAusland_section.addEventListener("click", event => {
     if (event.target.tagName === "INPUT") {
-      event.target.focus;
-      event.target.value = "";
+      event.target.focus();
+      event.target.select();
     }
   })
   JahresentgeltAusland_form.addEventListener("submit", (event) => {
