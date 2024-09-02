@@ -84,7 +84,7 @@ async function fetch_Bundesbank(land) {
       let entgelt_fremd = JahresentgeltAusland_input_entgelt.value;
       let entgelt_euro = Number(entgelt_fremd) * Number(kurs)
       let result_text = `der aktuelle Kurs ist: ${kurs} für eine Fremdwährung. 
-      Somit ergibt sich bei einem Entgelt von ${entgelt_fremd} ein Entgelt in Euro von ${entgelt_euro}.`;
+      Somit ergibt sich bei einem Entgelt von ${(Math.round(entgelt_fremd * 100) / 100).toFixed(2)} ein Entgelt in Euro von ${(Math.round(entgelt_euro * 100) / 100).toFixed(2)}.`;
       JahresentgeltAusland_result.innerHTML = result_text;
 
     });
