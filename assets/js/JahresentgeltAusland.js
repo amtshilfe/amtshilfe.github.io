@@ -17,7 +17,7 @@ let JahresentgeltAusland_aktuelles_land;
 let JahresentgeltAusland_Land = { "name": "", "jahreswerte": [] };
 
 const JahresentgeltAusland_api_url = "https://api.statistiken.bundesbank.de/rest/data/BBEX3/A."
-const JahresentgeltAusland_api_url_appendix = ".EUR.BB.AC.A04%20?&detail=dataonly"
+const JahresentgeltAusland_api_url_appendix = ".EUR.BB.AC.A04?&detail=dataonly"
 
 
 
