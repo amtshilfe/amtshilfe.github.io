@@ -80,7 +80,13 @@ async function fetch_Bundesbank(land) {
     })
     .then(() => {
       let entry = JahresentgeltAusland_Land.jahreswerte.find(o => o.jahr === JahresentgeltAusland_input_jahr.value)
-      JahresentgeltAusland_result.innerHTML = entry.wert;
+      let kurs = entry.wert;
+      let entgelt_fremd = JahresentgeltAusland_input_entgelt.value;
+      let entgelt_euro = Number(entgelt_fremd) * Number(kurs)
+      let result_text = `der aktuelle Kurs ist: ${kurs} für eine Fremdwährung. 
+      Somit ergibt sich bei einem Entgelt von ${entgelt_fremd} ein Entgelt in Euro von ${entgelt_euro}.`;
+      JahresentgeltAusland_result.innerHTML = result_text;
+
     });
 }
 async function fetch_Bundesbank_data(land) {
