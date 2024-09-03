@@ -10,7 +10,6 @@ const JahresentgeltAusland_input_entgelt = document.querySelector('#Jahresentgel
 const JahresentgeltAusland_result = document.querySelector("#JahresentgeltAusland-result");
 
 
-
 let JahresentgeltAusland_zeitreihen;
 let JahresentgeltAusland_laender;
 let JahresentgeltAusland_aktuelles_land;
@@ -120,9 +119,7 @@ async function fetch_Bundesbank_data(land) {
       JahresentgeltAusland_result.innerHTML = entry.wert;
     });
 
-  let promise = new Promise((resolve, reject) => {
-    if (resolve) { return JahresentgeltAusland_Land.jahreswerte }
-  });
+  return JahresentgeltAusland_Land.jahreswerte;
 
 }
 
