@@ -12,9 +12,9 @@ const JahresentgeltAusland_result = document.querySelector("#JahresentgeltAuslan
 
 let JahresentgeltAusland_zeitreihen;
 let JahresentgeltAusland_laender;
-let JahresentgeltAusland_Land_Jahreswerte = { "name": "", "jahreswerte": [] };
+// let JahresentgeltAusland_Land_Jahreswerte = { "name": "", "jahreswerte": [] };
 
-const path = "../assets/data/Jahreswechselkurse.json";
+const path_wechselkurse = "../assets/data/Jahreswechselkurse.json";
 const JahresentgeltAusland_api_url = "https://api.statistiken.bundesbank.de/rest/data/BBEX3/A."
 const JahresentgeltAusland_api_url_appendix = ".EUR.BB.AC.A04?&detail=dataonly"
 
@@ -26,53 +26,43 @@ function addEventListeners() {
       event.target.select();
     }
   })
+  JahresentgeltAusland_section.addEventListener("change", event => {
+    if (event.target.tagName === "INPUT" && event.target.id === "JahresentgeltAusland-land") {
+      update_datalist_jahre(event.target.value);
+    }
+  })
   JahresentgeltAusland_form.addEventListener("submit", (event) => {
     event.preventDefault();
     update_result(JahresentgeltAusland_input_land.value);
   })
-
 }
 
 async function init_JahresentgeltAusland() {
   addEventListeners();
   // load coutries that are supported by the Bundesbank API
-  let response = await fetch(path);
+  let response = await fetch(path_wechselkurse);
   JahresentgeltAusland_zeitreihen = await response.json();
   JahresentgeltAusland_laender = Object.keys(JahresentgeltAusland_zeitreihen).sort();
-  JahresentgeltAusland_laender.forEach(land => {
-    let option = document.createElement('option');
-    option.value = land;
-    JahresentgeltAusland_datalist_laender.appendChild(option);
-  })
-  // init with first country of the global list
-  let JahresentgeltAusland_aktuelles_land = JahresentgeltAusland_laender[0];
-  JahresentgeltAusland_input_land.value = JahresentgeltAusland_aktuelles_land;
-  // init with year before last year
-  JahresentgeltAusland_input_jahr.value = Number((new Date()).getFullYear()) - 2;
-  JahresentgeltAusland_input_entgelt.value = 1;
-  update_result(JahresentgeltAusland_aktuelles_land);
+  update_datalist(JahresentgeltAusland_datalist_laender, JahresentgeltAusland_laender);
+  JahresentgeltAusland_input_land.focus();
 }
 
 init_JahresentgeltAusland();
 
-
 async function update_result(land) {
-  // JahresentgeltAusland_Land_Jahreswerte.name = land;
   let jahreswerte;
-  // JahresentgeltAusland_Land_Jahreswerte.jahreswerte = [];
   jahreswerte = await fetch_Bundesbank_data(land);
-  let options = jahreswerte.map(({ jahr }) => jahr);
-  update_datalist(JahresentgeltAusland_datalist_jahre, options)
-
   let entry = jahreswerte.find(o => o.jahr === JahresentgeltAusland_input_jahr.value)
   let kurs = entry.wert;
   let entgelt_fremd = Number(JahresentgeltAusland_input_entgelt.value);
-  let entgelt_euro = (Number(entgelt_fremd) / Number(kurs)).toFixed(2).toString();
+  let entgelt_euro = (Number(entgelt_fremd) / Number(kurs)).toFixed(2);
   let waehrung = JahresentgeltAusland_zeitreihen[land].Waehrung;
-  let result_text = `der aktuelle Kurs ist: ${kurs}. Das heißt es gibt für 1,00 € ${kurs} ${waehrung}. <br>
-      Somit ergibt sich bei einem Entgelt von ${entgelt_fremd.toFixed(2)} ${waehrung} ein Entgelt von ${entgelt_euro} €.`;
+  let result_text =
+    `Der aktuelle Kurs ist: ${kurs}. <br>
+  Das heißt es gibt für 1,00 € ${kurs} ${waehrung}. <br> <br>
+  Somit ergibt sich bei einem Entgelt von ${entgelt_fremd.toFixed(2)} ${waehrung} ein Entgelt von ${entgelt_euro} €.`;
   JahresentgeltAusland_result.innerHTML = result_text;
-  console.log(JahresentgeltAusland_zeitreihen);
+  update_datalist_jahre(land);
 }
 
 
@@ -102,11 +92,9 @@ async function fetch_Bundesbank_data(land) {
       }
     }
   })
-  console.log(jahreswerte);
   return jahreswerte;
 
 }
-
 
 function update_datalist(datalist, options) {
   for (const element of options) {
@@ -116,8 +104,15 @@ function update_datalist(datalist, options) {
   }
 }
 
+async function update_datalist_jahre(land) {
+  let jahreswerte;
+  jahreswerte = await fetch_Bundesbank_data(land);
+  let options = jahreswerte.map(({ jahr }) => jahr);
+  update_datalist(JahresentgeltAusland_datalist_jahre, options)
+}
 
 
+// functions for testing purposes only 
 
 async function JahresentgeltAusland_update_zeitreihen(land) {
   // add empty array to object
@@ -128,7 +123,6 @@ async function JahresentgeltAusland_update_zeitreihen(land) {
   JahresentgeltAusland_zeitreihen[land]["jahreswerte"] = data;
 
 }
-
 
 async function fetchAll() {
   // fetches the data for all countries in list
