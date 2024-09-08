@@ -9,15 +9,25 @@ const JahresentgeltAusland_input_jahr = document.querySelector('#JahresentgeltAu
 const JahresentgeltAusland_input_entgelt = document.querySelector('#JahresentgeltAusland-entgelt');
 const JahresentgeltAusland_result = document.querySelector("#JahresentgeltAusland-result");
 
-
-let JahresentgeltAusland_zeitreihen;
-let JahresentgeltAusland_laender;
-// let JahresentgeltAusland_Land_Jahreswerte = { "name": "", "jahreswerte": [] };
-
 const path_wechselkurse = "../assets/data/Jahreswechselkurse.json";
 const JahresentgeltAusland_api_url = "https://api.statistiken.bundesbank.de/rest/data/BBEX3/A."
 const JahresentgeltAusland_api_url_appendix = ".EUR.BB.AC.A04?&detail=dataonly"
 
+let JahresentgeltAusland_zeitreihen;
+let JahresentgeltAusland_laender;
+
+
+async function init_JahresentgeltAusland() {
+  addEventListeners();
+  // load coutries that are supported by the Bundesbank API
+  let response = await fetch(path_wechselkurse);
+  JahresentgeltAusland_zeitreihen = await response.json();
+  JahresentgeltAusland_laender = Object.keys(JahresentgeltAusland_zeitreihen).sort();
+  update_datalist(JahresentgeltAusland_datalist_laender, JahresentgeltAusland_laender);
+  JahresentgeltAusland_input_land.focus();
+}
+
+init_JahresentgeltAusland();
 
 function addEventListeners() {
   JahresentgeltAusland_section.addEventListener("click", event => {
@@ -36,18 +46,6 @@ function addEventListeners() {
     update_result(JahresentgeltAusland_input_land.value);
   })
 }
-
-async function init_JahresentgeltAusland() {
-  addEventListeners();
-  // load coutries that are supported by the Bundesbank API
-  let response = await fetch(path_wechselkurse);
-  JahresentgeltAusland_zeitreihen = await response.json();
-  JahresentgeltAusland_laender = Object.keys(JahresentgeltAusland_zeitreihen).sort();
-  update_datalist(JahresentgeltAusland_datalist_laender, JahresentgeltAusland_laender);
-  JahresentgeltAusland_input_land.focus();
-}
-
-init_JahresentgeltAusland();
 
 async function update_result(land) {
   let jahreswerte;
@@ -88,9 +86,8 @@ async function fetch_Bundesbank_data(land) {
         wert = element.children[1].attributes['value'].value;
         jahreswerte.push({ "jahr": jahr, "wert": wert });
       } catch (error) {
-        console.error(
-          `kein Kurs angegeben für ${waehrung} / ${land} im Jahr ${jahr}. 
-          Bitte manuell prüfen. Der Eintrag wird nicht hinzugefügt`
+        console.warn(
+          `kein Kurs angegeben für ${waehrung} / ${land} im Jahr ${jahr}.\nBitte manuell prüfen. Der Eintrag wird nicht hinzugefügt`
         )
       }
     }
@@ -115,14 +112,10 @@ async function update_datalist_jahre(land) {
   update_datalist(JahresentgeltAusland_datalist_jahre, options)
 }
 
-
-
 async function JahresentgeltAusland_update_zeitreihen(land, data) {
   // add empty array to object
   // if existing, it will be updated to empty array
   JahresentgeltAusland_zeitreihen[land]["jahreswerte"] = [];
-  // let data;
-  // data = await fetch_Bundesbank_data(land);
   JahresentgeltAusland_zeitreihen[land]["jahreswerte"] = data;
 
 }
