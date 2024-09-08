@@ -67,7 +67,10 @@ async function update_result(land) {
 
 
 async function fetch_Bundesbank_data(land) {
-  // TODO:  check if already loaded, if already loaded, use cache.
+  //  check if already loaded, if already loaded, use cache.
+  if (JahresentgeltAusland_zeitreihen[land]["jahreswerte"] !== undefined) {
+    return JahresentgeltAusland_zeitreihen[land]["jahreswerte"];
+  };
   let jahreswerte = [];
   let waehrung = JahresentgeltAusland_zeitreihen[land].Waehrung;
   let api_url_Bundensbank = JahresentgeltAusland_api_url + waehrung + JahresentgeltAusland_api_url_appendix;
@@ -92,6 +95,7 @@ async function fetch_Bundesbank_data(land) {
       }
     }
   })
+  JahresentgeltAusland_update_zeitreihen(land, jahreswerte);
   return jahreswerte;
 
 }
@@ -112,21 +116,13 @@ async function update_datalist_jahre(land) {
 }
 
 
-// functions for testing purposes only 
 
-async function JahresentgeltAusland_update_zeitreihen(land) {
+async function JahresentgeltAusland_update_zeitreihen(land, data) {
   // add empty array to object
   // if existing, it will be updated to empty array
   JahresentgeltAusland_zeitreihen[land]["jahreswerte"] = [];
-  let data;
-  data = await fetch_Bundesbank_data(land);
+  // let data;
+  // data = await fetch_Bundesbank_data(land);
   JahresentgeltAusland_zeitreihen[land]["jahreswerte"] = data;
 
-}
-
-async function fetchAll() {
-  // fetches the data for all countries in list
-  for await (const c_land of JahresentgeltAusland_laender) {
-    await JahresentgeltAusland_update_zeitreihen(c_land);
-  }
 }

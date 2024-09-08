@@ -129,6 +129,9 @@ main {
     display: flex;
     justify-content: center;
 
+    /* &:has(input:focus) {
+      border-color: darkgreen;
+    } */
 
   }
 
