@@ -57,10 +57,14 @@ init_JahresentgeltAusland();
 
 
 async function update_result(land) {
-  JahresentgeltAusland_Land_Jahreswerte.name = land;
-  JahresentgeltAusland_Land_Jahreswerte.jahreswerte = [];
-  await fetch_Bundesbank_data(land);
-  let entry = JahresentgeltAusland_Land_Jahreswerte.jahreswerte.find(o => o.jahr === JahresentgeltAusland_input_jahr.value)
+  // JahresentgeltAusland_Land_Jahreswerte.name = land;
+  let jahreswerte;
+  // JahresentgeltAusland_Land_Jahreswerte.jahreswerte = [];
+  jahreswerte = await fetch_Bundesbank_data(land);
+  let options = jahreswerte.map(({ jahr }) => jahr);
+  update_datalist(JahresentgeltAusland_datalist_jahre, options)
+
+  let entry = jahreswerte.find(o => o.jahr === JahresentgeltAusland_input_jahr.value)
   let kurs = entry.wert;
   let entgelt_fremd = Number(JahresentgeltAusland_input_entgelt.value);
   let entgelt_euro = (Number(entgelt_fremd) / Number(kurs)).toFixed(2).toString();
@@ -74,6 +78,7 @@ async function update_result(land) {
 
 async function fetch_Bundesbank_data(land) {
   // TODO:  check if already loaded, if already loaded, use cache.
+  let jahreswerte = [];
   let waehrung = JahresentgeltAusland_zeitreihen[land].Waehrung;
   let api_url_Bundensbank = JahresentgeltAusland_api_url + waehrung + JahresentgeltAusland_api_url_appendix;
   let response = await fetch(api_url_Bundensbank);
@@ -88,24 +93,17 @@ async function fetch_Bundesbank_data(land) {
       let wert
       try {
         wert = element.children[1].attributes['value'].value;
+        jahreswerte.push({ "jahr": jahr, "wert": wert });
       } catch (error) {
         console.error(
           `kein Kurs angegeben für ${waehrung} / ${land} im Jahr ${jahr}. 
           Bitte manuell prüfen. Der Eintrag wird nicht hinzugefügt`
         )
-        wert = null;
-      }
-      if (wert !== null) {
-        JahresentgeltAusland_Land_Jahreswerte.jahreswerte.push({ "jahr": jahr, "wert": wert });
-        // export to own function
-        let option = document.createElement('option');
-        option.value = jahr;
-        JahresentgeltAusland_datalist_jahre.appendChild(option);
       }
     }
   })
-  console.log(JahresentgeltAusland_Land_Jahreswerte.jahreswerte);
-  return JahresentgeltAusland_Land_Jahreswerte.jahreswerte;
+  console.log(jahreswerte);
+  return jahreswerte;
 
 }
 
