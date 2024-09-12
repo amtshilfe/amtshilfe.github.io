@@ -129,10 +129,9 @@ main {
     display: flex;
     justify-content: center;
 
-    /* &:has(input:focus) {
-      border-color: darkgreen;
-    } */
-
+    &:has(input:disabled) {
+      background-color: var(--ba_gray);
+    }
   }
 
   & [data-style~="no-border"] {
@@ -148,6 +147,16 @@ main {
     border: none;
     padding: 0 2px;
     margin: 0;
+    transition: all ease 200ms;
+
+  }
+
+  & input:disabled~span.input_label {
+    background-color: transparent;
+    top: 3px;
+    font-style: italic;
+
+
   }
 
   & input {
@@ -157,12 +166,18 @@ main {
     padding: 6px 15px;
     font-size: calc(var(--base-size) * var(--scale));
     font-weight: 500;
+    color: black;
+
+    &:focus {
+      outline: transparent;
+    }
+
   }
 
-  & input:focus {
-    border: none;
-    outline: transparent;
+  & label:has(input:focus) {
+    border: 2px solid lightskyblue;
   }
+
 }
 
 button {
@@ -175,7 +190,13 @@ button {
   margin: 3px;
   border-radius: var(--border-radius);
   cursor: pointer;
+
+  &:focus {
+    outline: transparent;
+    border: 2px solid black;
+  }
 }
+
 
 .button-small {
   font-size: calc(var(--base-size));

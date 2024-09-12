@@ -16,6 +16,16 @@
                 id="JahresentgeltAusland-entgelt" placeholder="0,00" title="Entgelt laut Bescheinigung">
             <span class="input_label">Entgelt</span>
         </label>
+        <label for="JahresentgeltAusland-kurs">
+            <input type="number" required min="0.00001" step="0.00001" name="JahresentgeltAusland-kurs"
+                id="JahresentgeltAusland-kurs" placeholder="1,0000" title="Wechselkurs" disabled>
+            <span class="input_label">Wechselkurs</span>
+        </label>
+        <label for="JahresentgeltAusland-kurs-enable" data-style="no-border">(
+            <input type="checkbox" name="iJahresentgeltAusland-kurs-enable" id="JahresentgeltAusland-kurs-enable">
+            Kurs überschreiben )
+        </label>
+
         <button type="submit" id="JahresentgeltAusland-submit-button">Berechnen</button>
         <!-- datalists will be filled dynamically with JS -->
         <datalist id="JahresentgeltAusland-laender"></datalist>
