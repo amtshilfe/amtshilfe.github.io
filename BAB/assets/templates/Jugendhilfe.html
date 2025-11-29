@@ -1,0 +1,48 @@
+<section id="Jugendhilfe">
+    <h2>Anfrage an Jugendhilfe bei BAB</h2>
+    <form id="Jugendhilfe-form" name="Jugendhilfe-form">
+        <label for="Jugendhilfe-firstname">
+            <input type="text" placeholder="Vorname" required id="Jugendhilfe-firstname" name="Jugendhilfe-firstname">
+            <span class="input_label">Vorname</span>
+        </label>
+        <label for="Jugendhilfe-lastname">
+            <input type="text" placeholder="Nachname" required id="Jugendhilfe-lastname" name="Jugendhilfe-lastname">
+            <span class="input_label">Nachname</span>
+        </label>
+        <label for="Jugendhilfe-KD">
+            <input type="text" placeholder="000X000000" required maxlength="10" minlength="10"
+                pattern="[0-9]{3}[a-z,A-Z]{1}[0-9]{6}" title="gültige Kundennummer wie z.B.: 123D123456"
+                id="Jugendhilfe-KD" name="Jugendhilfe-KD">
+            <span class="input_label">Kundennummer</span>
+        </label>
+        <label for="birthdate">
+            <input type="date" id="Jugendhilfe-birthdate" required name="birthdate">
+            <span class="input_label">Geburtsdatum</span>
+        </label>
+        <label for="Jugendhilfe-type" id="Leistungsart">
+            <label for="Jugendhilfe-BvB" data-style="no-border">
+                <input type="radio" name="Jugendhilfe-type" id="Jugendhilfe-BvB" checked>
+                BAB bei BvB
+            </label>
+            <label for="Jugendhilfe-BAB" data-style="no-border">
+                <input type="radio" name="Jugendhilfe-type" id="Jugendhilfe-BAB">
+                BAB bei Ausbildung
+            </label>
+            <span class="input_label">Leistungsart</span>
+        </label>
+        <button type="submit" id="Jugendhilfe-send-mail-button">E-Mail erstellen</button>
+    </form>
+    <h2>Vorschau E-Mail:</h2>
+    <result id="Jugendhilfe-result" class="result-fullsize flex-column">
+        <div class="flex-row">
+            <h3>Betreff</h3><button type="button" class="button-small copy-text"
+                data-copySource="#Jugendhilfe-Betreff-preview">kopieren</button>
+        </div>
+        <p id="Jugendhilfe-Betreff-preview" class="text-preview align-left">der Betreff</p>
+        <div class="flex-row">
+            <h3>Text</h3><button type="button" class="button-small copy-text"
+                data-copySource="#Jugendhilfe-Text-preview">kopieren</button>
+        </div>
+        <p id="Jugendhilfe-Text-preview" class="text-preview align-left">der Text der Email</p>
+    </result>
+</section>

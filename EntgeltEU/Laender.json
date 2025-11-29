@@ -1,0 +1,177 @@
+[
+    {
+        "Land": "Belgien",
+        "Währung": "Euro",
+        "Währungscode": "EUR"
+    },
+    {
+        "Land": "Bulgarien",
+        "Währung": "Bulgarischer Lew",
+        "Währungscode": "BGN"
+    },
+    {
+        "Land": "Deutschland",
+        "Währung": "Euro",
+        "Währungscode": "EUR"
+    },
+    {
+        "Land": "Dänemark",
+        "Währung": "Dänische Krone",
+        "Währungscode": "DKK"
+    },
+    {
+        "Land": "Estland",
+        "Währung": "Euro",
+        "Währungscode": "EUR"
+    },
+    {
+        "Land": "Estland (bis 2010)",
+        "Währung": "Estnische Kroon",
+        "Währungscode": "EEK"
+    },
+    {
+        "Land": "Finnland",
+        "Währung": "Euro",
+        "Währungscode": "EUR"
+    },
+    {
+        "Land": "Frankreich",
+        "Währung": "Euro",
+        "Währungscode": "EUR"
+    },
+    {
+        "Land": "Griechenland",
+        "Währung": "Euro",
+        "Währungscode": "EUR"
+    },
+    {
+        "Land": "Italien",
+        "Währung": "Euro",
+        "Währungscode": "EUR"
+    },
+    {
+        "Land": "Irland",
+        "Währung": "Euro",
+        "Währungscode": "EUR"
+    },
+    {
+        "Land": "Island",
+        "Währung": "Isländische Króna",
+        "Währungscode": "ISK"
+    },
+    {
+        "Land": "Lettland",
+        "Währung": "Euro",
+        "Währungscode": "EUR"
+    },
+    {
+        "Land": "Lettland (bis 2013)",
+        "Währung": "Lettischer Lats",
+        "Währungscode": "LVL"
+    },
+    {
+        "Land": "Litauen",
+        "Währung": "Euro",
+        "Währungscode": "EUR"
+    },
+    {
+        "Land": "Litauen (bis 2014)",
+        "Währung": "Litauischer Litas",
+        "Währungscode": "LTL"
+    },
+    {
+        "Land": "Luxemburg",
+        "Währung": "Euro",
+        "Währungscode": "EUR"
+    },
+    {
+        "Land": "Kroatien",
+        "Währung": "Euro",
+        "Währungscode": "EUR"
+    },
+    {
+        "Land": "Kroatien (bis 2022)",
+        "Währung": "Kroatische Kuna",
+        "Währungscode": "HRK"
+    },
+    {
+        "Land": "Liechtenstein",
+        "Währung": "Schweizer Franken",
+        "Währungscode": "CHF"
+    },
+    {
+        "Land": "Malta",
+        "Währung": "Euro",
+        "Währungscode": "EUR"
+    },
+    {
+        "Land": "Niederlande",
+        "Währung": "Euro",
+        "Währungscode": "EUR"
+    },
+    {
+        "Land": "Norwegen",
+        "Währung": "Norwegische Krone",
+        "Währungscode": "NOK"
+    },
+    {
+        "Land": "Österreich",
+        "Währung": "Euro",
+        "Währungscode": "EUR"
+    },
+    {
+        "Land": "Polen",
+        "Währung": "Polnischer Złoty",
+        "Währungscode": "PLN"
+    },
+    {
+        "Land": "Portugal",
+        "Währung": "Euro",
+        "Währungscode": "EUR"
+    },
+    {
+        "Land": "Rumänien",
+        "Währung": "Rumänischer Leu",
+        "Währungscode": "RON"
+    },
+    {
+        "Land": "Schweden",
+        "Währung": "Schwedische Krone",
+        "Währungscode": "SEK"
+    },
+    {
+        "Land": "Schweiz",
+        "Währung": "Schweizer Franken",
+        "Währungscode": "CHF"
+    },
+    {
+        "Land": "Slowakei",
+        "Währung": "Euro",
+        "Währungscode": "EUR"
+    },
+    {
+        "Land": "Slowenien",
+        "Währung": "Euro",
+        "Währungscode": "EUR"
+    },
+    {
+        "Land": "Spanien",
+        "Währung": "Euro",
+        "Währungscode": "EUR"
+    },
+    {
+        "Land": "Tschechien",
+        "Währung": "Tschechische Krone",
+        "Währungscode": "CZK"
+    },
+    {
+        "Land": "Ungarn",
+        "Währung": "Ungarischer Forint",
+        "Währungscode": "HUF"
+    },
+    {
+        "Land": "Zypern (griechischer Teil)",
+        "Währung": "Euro",
+        "Währungscode": "EUR"
+    }
+]

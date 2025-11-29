@@ -1,0 +1,85 @@
+[
+  {
+    "title": "SQL Formatter",
+    "description": "Format SQL queries instantly.",
+    "url": "https://sqlformat.org/",
+    "tags": ["Development", "Database"],
+    "icon": "💾"
+  },
+  {
+    "title": "Unsplash",
+    "description": "The internet's source of freely-usable images.",
+    "url": "https://unsplash.com/",
+    "tags": ["Design", "Images"],
+    "icon": "📷"
+  },
+  {
+    "title": "MDN Web Docs",
+    "description": "Resources for developers, by developers.",
+    "url": "https://developer.mozilla.org/",
+    "tags": ["Development", "Reference"],
+    "icon": "🔖"
+  },
+  {
+    "title": "TinyPNG",
+    "description": "Smarte Komprimierung für WebP, PNG und JPEG Bilder.",
+    "url": "https://tinypng.com/",
+    "tags": ["Design", "Images"],
+    "emoji": "🖼️"
+  },
+  {
+    "title": "Lorem Ipsum",
+    "description": "Platzhaltertext für Layouts generieren.",
+    "url": "https://lipsum.com/",
+    "tags": ["Design", "Utils"],
+    "emoji": "📄"
+  },
+  {
+    "title": "Diff Checker",
+    "description": "Textdateien vergleichen um Unterschiede zu finden.",
+    "url": "https://www.diffchecker.com/",
+    "tags": ["Development", "Utils"],
+    "emoji": "⚖️"
+  },
+  {
+    "title": "Can I Use",
+    "description": "Browser-Support Tabellen für Webtechnologien.",
+    "url": "https://caniuse.com/",
+    "tags": ["Development", "Reference"],
+    "emoji": "🌐"
+  },
+  {
+    "title": "SVGOMG",
+    "description": "SVG Dateien optimieren und minimieren.",
+    "url": "https://jakearchibald.github.io/svgomg/",
+    "tags": ["Design", "SVG"]
+  },
+  {
+    "title": "JSON Formatter",
+    "description": "JSON Daten validieren, formatieren und verschönern.",
+    "url": "https://jsonformatter.org/",
+    "tags": ["Development", "Data"],
+    "emoji": "📋"
+  },
+  {
+    "title": "Base64 Encoder",
+    "description": "Strings oder Bilder in Base64 kodieren und dekodieren.",
+    "url": "https://www.base64encode.org/",
+    "tags": ["Development", "Utils"],
+    "emoji": "🔢"
+  },
+  {
+    "title": "Color Palette Gen",
+    "description": "Wunderschöne Farbschemata generieren.",
+    "url": "https://coolors.co/",
+    "tags": ["Design", "Colors"],
+    "emoji": "🎨"
+  },
+  {
+    "title": "Regex Tester",
+    "description": "Reguläre Ausdrücke testen und debuggen.",
+    "url": "https://regex101.com/",
+    "tags": ["Development", "Regex"],
+    "emoji": "🔡"
+  }
+]

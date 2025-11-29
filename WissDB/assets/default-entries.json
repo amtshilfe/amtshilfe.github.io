@@ -1,0 +1,25 @@
+[
+  {
+    "id": 0,
+    "title": "Markdown Beispiel",
+    "content": "### Willkommen in der Wissensdatenbank!\n\nHier können Sie:\n- Informationen mit **Markdown** formatieren\n- Einträge mit Tags organisieren\n- Daten importieren/exportieren\n- [Links einfügen](https://commonmark.org/help/)\n- und Tabellen einfügen \n- auch ein Bild\n\n![Image](https://web.arbeitsagentur.de/headerfooter/hf/releases/v6.x/bahf-webcomponents/assets/ba-logo.svg)",
+    "tags": [
+      "Markdown",
+      "Beispiel"
+    ],
+    "created": "2025-01-29T18:27:42.166Z"
+  },
+  {
+    "id": 1,
+    "title": "Mitteilung neuer Bankverbindung",
+    "content": "Sie können die Änderung der Bankverbindung am einfachsten über die eServices auf der Seite https://www.arbeitsagentur.de/eservices erfassen. \n \nSofern dies nicht möglich sein sollte, können Sie die Änderung auch schriftlich mitteilen. Geben Sie in diesem Fall bitte mindestens Name, Kundennummer und die Bankverbindung an. Bitte unterschreiben Sie die Änderungsmitteilung persönlich. Eine Mitteilung per E-Mail ist leider nicht ausreichend.",
+    "tags": [
+      "Textbaustein",
+      "BV",
+      "Bankverbindung",
+      "eServices",
+      "Veränderungsmitteilung"
+    ],
+    "created": "2025-01-29T18:27:42.168Z"
+  }
+]

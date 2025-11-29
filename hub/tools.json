@@ -1,0 +1,65 @@
+[
+  {
+    "title": "Tage",
+    "description": "Tage zwischen Daten",
+    "url": "../BAB/#Tage",
+    "tags": ["BAB", "Leistungsrecht", "Fristen", "Kalender"],
+    "emoji": ""
+  },
+  {
+    "title": "Fristen",
+    "description": "Frsitenrechner",
+    "url": "../BAB/#Fristen",
+    "tags": ["BAB", "Leistungsrecht", "Fristen", "Kalender"],
+    "emoji": ""
+  },
+  {
+    "title": "Mutterschutz",
+    "description": "Rechner für Mutterschutzfrist",
+    "url": "../BAB/#Mutterschutz",
+    "tags": ["BAB", "Leistungsrecht"],
+    "emoji": ""
+  },
+  {
+    "title": "Jugendhilfe",
+    "description": "Anfrage an Jugendhilfe",
+    "url": "../BAB/#Jugendhilfe",
+    "tags": ["BAB", "Leistungsrecht", "Vorlage", "Jugendhilfe", "Mail"],
+    "emoji": "📧"
+  },
+  {
+    "title": "Jahresentgelt €",
+    "description": "Jahresentgelt für Nicht-Euro-Länder",
+    "url": "../BAB/#JahresentgeltAusland",
+    "tags": ["BAB", "Leistungsrecht", "Rechner", "Umrechnung", "Währungsrechner"],
+    "emoji": "€"
+  },
+  {
+    "title": "Entgelt EU",
+    "description": "Berechnungsbogen für Entgelt aus PD U1",
+    "url": "../EntgeltEU/",
+    "tags": ["Leistungsrecht", "ALG"],
+    "emoji": "💶"
+  },
+  {
+    "title": "Q1 Kalender",
+    "description": "Kalender für Q1 Berechnungen etc.",
+    "url": "../Q1/",
+    "tags": ["Leistungsrecht", "ALG", "BAB", "Kalender", "Fristen", "Rechner"],
+    "emoji": "📅"
+  },
+  {
+    "title": "Prüfung IBAN und sonstige Texte",
+    "description": "Vergleich von Texten, Ziffern, IBANs usw. Mit Anzeige der Unterschiede",
+    "url": "../StringCheck/",
+    "tags": ["Vergleich", "ALG", "BAB", "Check", "Double Check"],
+    "emoji": "🔎"
+  },
+  {
+    "title": "WissDB",
+    "description": "lokal gespeicherte Wissensdatenbank mit Export-Funktion",
+    "url": "../WissDB/",
+    "tags": ["Daten", "Wissen", "Textbausteine"],
+    "emoji": "📚"
+  }
+]

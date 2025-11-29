@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Berechnungsprotokoll Entgelt EU</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+<div class="container" role="main">
+    <div class="header-container">
+        <h1>Berechnungsprotokoll Entgelt aus PD-U1</h1>
+        <button type="button" id="print-button" class="print-button no-print" aria-label="Druckvorschau öffnen">
+            Drucken
+        </button>
+    </div>
+
+    <div class="main-content">
+        <form class="left-form" aria-labelledby="pdu1-form-heading">
+            <div class="form-section">
+                <h2 id="pdu1-form-heading">Daten aus PD-U1</h2>
+                <div class="form-grid">
+                    <label for="von_datum">Zeitraum von</label>
+                    <input type="date" id="von_datum" aria-label="Startdatum des Zeitraums"/>
+
+                    <label for="bis_datum">Zeitraum bis</label>
+                    <input type="date" id="bis_datum" aria-label="Enddatum des Zeitraums"/>
+
+                    <label for="tage">Tage (gesamt)</label>
+                    <input type="number" id="tage" class="calculated-grey" readonly
+                           aria-label="Gesamtzahl der Tage im Zeitraum"/>
+
+                    <label for="stichtag">Stichtag für Wechselkurs</label>
+                    <input type="date" id="stichtag" class="calculated-grey" readonly
+                           aria-label="Automatischer Stichtag für den Wechselkurs"/>
+
+                    <label for="fremdwaehrung">Land (Währung)</label>
+                    <select id="fremdwaehrung" aria-label="Auswahl des Landes und der Währung">
+                        <option value="">-- Bitte wählen --</option>
+                    </select>
+
+                    <label for="betrag_fremd" id="currency_code_display_label">Betrag PD-U1</label>
+                    <input type="number" step="0.01" id="betrag_fremd"
+                           aria-labelledby="currency_code_display_label"/>
+                    <label for="wechselkurs_eur">
+                        Wechselkurs in €
+                        <a href="https://www.baintranet.de/002/005/004/002/003/008/Seiten/Neues-Recht-VO-883-04-Umrechnungskurse.aspx"
+                           id="wechselkurs-info-link" class="info-icon no-print"
+                           title="Informationen zu aktuellen Wechselkursen (BA-Intranet)" target="_blank"
+                           rel="noopener noreferrer"
+                           aria-label="Weitere Informationen zu Wechselkursen (öffnet neue Registerkarte)">ℹ</a>
+                    </label>
+                    <input type="number" step="0.000001" id="wechselkurs_eur"
+                           aria-label="Wechselkurs in Euro eingeben"/>
+                    <div class="buttons-container no-print">
+                        <button type="button" id="set-exchange-rate-button" class="action-button no-print"
+                                title="Kurs zum Stichtag bei Bundesbank abrufen"
+                                aria-label="Kurs zum Stichtag bei Bundesbank abrufen">
+                            Kurs abrufen
+                        </button>
+                    </div>
+
+                    <label for="betrag_eur">Betrag in € (umgerechnet)</label>
+                    <input type="text" id="betrag_eur" class="calculated-grey" readonly
+                           aria-label="Umgerrechneter Betrag in Euro"/>
+
+                    <label for="bemessung_ab_manuell_input">Bemessung ab:</label>
+                    <input type="date" id="bemessung_ab_manuell_input"
+                           aria-label="Startdatum für die Bemessung der gefilterten Tabelle"/>
+
+                    <div class="buttons-container no-print">
+                        <button type="button" id="set_bemessung_1_jahr_button" class="action-button"
+                                aria-label="Setze Bemessungsstart auf 1 Jahr vor dem Enddatum des Zeitraums">
+                            1 Jahr zurück
+                        </button>
+                        <button type="button" id="set_bemessung_2_jahre_button" class="action-button"
+                                aria-label="Setze Bemessungsstart auf 2 Jahre vor dem Enddatum des Zeitraums">
+                            2 Jahre zurück
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="right-table-section" role="region" aria-labelledby="abrechnungszeitraeume-heading">
+            <div class="flex-column-container">
+                <h2 id="abrechnungszeitraeume-heading">Abrechnungszeiträume</h2>
+                <table id="details-table" class="form-section" aria-live="polite" aria-atomic="true">
+                    <thead>
+                    <tr>
+                        <th scope="col">von</th>
+                        <th scope="col">bis</th>
+                        <th scope="col">Jahr</th>
+                        <th scope="col">Tage</th>
+                        <th scope="col">€</th>
+                    </tr>
+                    </thead>
+                    <tbody id="details-table-body">
+                    </tbody>
+                    <tfoot id="details-table-foot">
+                    <tr>
+                        <td colspan="4" style="text-align: right; font-weight: bold;">
+                            Summe:
+                        </td>
+                        <td id="details-table-sum" class="number-cell" style="font-weight: bold;"
+                            aria-label="Summe der gefilterten Euro-Beträge in der Tabelle">
+                            0,00
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div class="spacer no-print"></div>
+            <div class="flex-column-container">
+                <div class="form-section" role="region" aria-labelledby="bemessung-heading">
+                    <h2 id="bemessung-heading">Bemessung</h2>
+                    <div class="form-grid">
+                        <label for="bemessung_von">von:</label>
+                        <input type="date" id="bemessung_von" class="calculated-grey" readonly
+                               aria-label="Startdatum des Bemessungszeitraums"/>
+                        <label for="bemessung_bis">bis:</label>
+                        <input type="date" id="bemessung_bis" class="calculated-grey" readonly
+                               aria-label="Enddatum des Bemessungszeitraums"/>
+                        <label for="bemessung_tage">Tage:</label>
+                        <input type="number" id="bemessung_tage" class="calculated-grey" readonly
+                               aria-label="Anzahl der Tage im Bemessungszeitraum"/>
+                        <label for="bemessung_entgelt">Entgelt €:</label>
+                        <input type="text" id="bemessung_entgelt" class="calculated-grey" readonly
+                               aria-label="Bemessungsentgelt in Euro, basierend auf der gefilterten Tabellensumme"/>
+                    </div>
+                </div>
+                <div class="form-section" role="region" aria-labelledby="jahressummen-heading">
+                    <div class="form-grid" id="jahressummen_grid" aria-live="polite" aria-atomic="true"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="entgelt_eu.js"></script>
+</body>
+
+</html>
+
+<!-- End of HTML document -->
+<!--
+    Hinweis: Diese HTML-Datei ist ein Beispiel und enthält keine echten Daten.
+    Die JSON-Daten für die Länderauswahl sind fiktiv und dienen nur zu Illustrationszwecken.
+-->
+<!--
+    Diese Datei ist ein Beispiel für eine HTML-Seite, die eine Berechnung von Entgelten
+    in verschiedenen Währungen und Zeiträumen ermöglicht. Sie enthält auch Funktionen
+    zur Berechnung von Jahressummen und zur Anzeige von Ergebnissen in einer Tabelle.
+    Die Datei ist so strukturiert, dass sie barrierefrei ist und grundlegende
+    Interaktivität bietet.
+    Die JavaScript-Funktionen sind modular aufgebaut und verwenden moderne
+    JavaScript-Methoden, um die Benutzererfahrung zu verbessern.
+-->

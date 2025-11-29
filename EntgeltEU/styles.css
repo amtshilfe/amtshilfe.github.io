@@ -1,0 +1,796 @@
+/* --- Allgemeine Stile für die Anwendung --- */
+:root {
+    /* Farbpalette der Bundesagentur für Arbeit (BA) */
+    --color-background: #ffffff;
+    --color-surface: #ffffff;
+    --color-text-primary: #1d1d1f;
+    --color-text-secondary: #6e6e73;
+    --color-text-placeholder: #aeaeb2;
+    --color-accent-red: #e3001b;
+    --color-accent-red-hover: #b30015;
+    --color-on-accent: #ffffff;
+    --color-border-subtle: #dcdcdc;
+    --color-border-input: #b0b0b5;
+    --color-input-bg: #ffffff;
+    --color-calculated-bg: #e9e9ed;
+    --color-focus-ring: var(--color-accent-red);
+    --color-table-stripe: #f8f8f8;
+    --color-info-icon: #007bff;
+    /* Blauer Farbton für Info-Icons, anpassbar */
+
+    /* Schriftarten */
+    --font-ba: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* Basis-Stile und Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-ba);
+}
+
+body {
+    font-size: 16px;
+    /* Basisschriftgröße */
+    font-weight: 400;
+    line-height: 1.2;
+    /* Angepasste Zeilenhöhe für Kompaktheit */
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+    padding: 24px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.spacer {
+    height: .2rem;
+}
+
+/* Überschriften-Stile */
+h6,
+h5,
+h4,
+h3,
+h2,
+h1 {
+    margin: 0;
+    margin-bottom: 0.6rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--color-text-primary);
+}
+
+/* Container-Stil */
+.container {
+    padding: 0;
+    max-width: 1200px;
+    margin: auto;
+    background-color: var(--color-surface);
+    color: var(--color-text-primary);
+    position: relative;
+    /* Notwendig für absolute Positionierung des Druck-Buttons */
+}
+
+/* Kopfbereich der Anwendung */
+.header-container {
+    position: relative;
+    /* Bezugspunkt für den Druck-Button */
+    padding-bottom: 12px;
+    /* Etwas Platz unter der Überschrift */
+    margin-bottom: 12px;
+    border-bottom: 3px solid var(--color-accent-red);
+}
+
+.header-container>h1 {
+    border-bottom: none;
+    /* Linie wird jetzt vom Container gemacht */
+    margin-bottom: 0;
+    /* Kein Abstand mehr unter H1 selbst */
+}
+
+/* NEU: Stil für den Druck-Button im Header */
+.print-button {
+    position: absolute;
+    /* Absolute Positionierung */
+    top: 0;
+    /* Oben */
+    right: 0;
+    /* Rechts */
+    background-color: var(--color-accent-red);
+    color: var(--color-on-accent);
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    /* Etwas kleineres Padding */
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    z-index: 10;
+    /* Stellt sicher, dass er über anderen Elementen liegt */
+}
+
+.print-button:hover {
+    background-color: var(--color-accent-red-hover);
+}
+
+/* Ende NEU: Druck-Button */
+
+h1 {
+    font-size: calc(1.2rem + 0.6vw);
+    /* Responsive Schriftgröße */
+}
+
+h2 {
+    font-size: calc(0.8rem + 0.6vw);
+    /* Responsive Schriftgröße */
+    border-bottom: 1px solid var(--color-border-subtle);
+}
+
+/* Stile für Formularabschnitte */
+.form-section {
+    margin-bottom: 12px;
+    /* Reduzierter Abstand für Kompaktheit */
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.form-section:last-child {
+    margin-bottom: 0;
+}
+
+/* Stile für das Formular-Raster */
+.form-grid {
+    display: grid;
+    grid-template-columns: minmax(180px, auto) 1fr;
+    /* Spaltenbreiten für Label und Input */
+    gap: 10px 10px;
+    /* Abstände im Raster */
+    align-items: center;
+    /* Vertikale Ausrichtung der Elemente */
+}
+
+/* Hauptinhaltsbereich (flexibel für Spaltenlayout) */
+.main-content {
+    display: flex;
+    flex-wrap: wrap;
+    /* Umbruch bei Bedarf */
+    gap: 24px;
+    /* Abstand zwischen den Spalten */
+}
+
+/* Linke und rechte Spalte im Hauptinhalt */
+.left-form,
+.right-table-section {
+    flex: 1;
+    /* Flexible Breite */
+    min-width: 430px;
+    /* Mindestbreite vor Umbruch */
+}
+
+/* Stile für Beschriftungen (Labels) */
+label {
+    grid-column: 1 / 2;
+    /* Label in der ersten Spalte des Grids */
+    font-weight: 600;
+    color: var(--color-text-primary);
+    padding-top: 0;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Info-Icon neben Labels */
+.info-icon {
+    display: inline-block;
+    font-weight: bold;
+    color: var(--color-info-icon);
+    text-decoration: none;
+    border: 1px solid var(--color-info-icon);
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    /* Feste Höhe für Kreisform */
+    line-height: 18px;
+    /* Vertikale Zentrierung des Texts */
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+    margin-left: auto;
+    /* Schiebt Icon an den rechten Rand des Labels */
+}
+
+.info-icon:hover {
+    background-color: var(--color-info-icon);
+    color: white;
+}
+
+/* Container für Eingabefelder (zweite Spalte des Grids) */
+.input-container {
+    grid-column: 2 / 3;
+    display: flex;
+    gap: 10px;
+    min-width: 0;
+    /* Verhindert Überlaufen bei schmalen Viewports */
+}
+
+.input-container.full-width-input input {
+    width: 100%;
+}
+
+/* Allgemeine Stile für Eingabefelder und Select-Boxen */
+input[type="text"],
+input[type="date"],
+input[type="number"],
+select {
+    font-size: 16px;
+    background-color: var(--color-input-bg);
+    border: 1px solid var(--color-border-input);
+    border-radius: 4px;
+    padding: 8px 12px;
+    height: 35px;
+    width: 100%;
+    color: var(--color-text-primary);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    min-width: 0;
+    /* Verhindert Überlaufen */
+}
+
+/* Fokus-Stile für Eingabefelder */
+input[type="text"]:focus,
+input[type="date"]:focus,
+input[type="number"]:focus,
+select:focus {
+    outline: none;
+    border-color: var(--color-accent-red);
+    box-shadow: 0 0 0 1px var(--color-accent-red);
+}
+
+/* Stile für das Kalender-Icon bei Datumseingaben */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    opacity: 0.9;
+}
+
+/* Stile für Aktions-Schaltflächen */
+button.action-button {
+    background-color: var(--color-accent-red);
+    color: var(--color-on-accent);
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    white-space: nowrap;
+    /* Verhindert Textumbruch */
+}
+
+button.action-button:hover {
+    background-color: var(--color-accent-red-hover);
+}
+
+button.action-button:disabled {
+    background-color: #cccccc;
+    /* Grauer Hintergrund für deaktivierte Buttons */
+    color: #666666;
+    cursor: not-allowed;
+}
+
+/* Container für die rechtsbündige Schaltflächen */
+.buttons-container {
+    grid-column: 2 / 3;
+    /* In der zweiten Spalte des Grids */
+    display: flex;
+    gap: 8px 9px;
+    /* Abstand zwischen den Buttons */
+    align-items: center;
+    justify-content: flex-end;
+    /* Buttons rechtsbündig */
+    margin-top: -5px;
+    /* Abstand zu zugehörigem Element verringert */
+}
+
+/* Stile für berechnete, schreibgeschützte Felder */
+.calculated-grey,
+input[readonly] {
+    background-color: var(--color-calculated-bg);
+    border-color: transparent;
+    color: var(--color-text-secondary);
+    cursor: default;
+    font-weight: 400;
+}
+
+.calculated-grey:focus,
+input[readonly]:focus {
+    border-color: transparent;
+    background-color: var(--color-calculated-bg);
+    box-shadow: none;
+}
+
+/* Platzhaltertext-Stil */
+::placeholder {
+    color: var(--color-text-secondary);
+}
+
+/* Stile für die Detailtabelle (Abrechnungszeiträume) */
+#details-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 0;
+    /* Keine abgerundeten Ecken für die Tabelle */
+    overflow: hidden;
+    /* Verhindert Überlaufen von Inhalten */
+}
+
+#details-table th,
+#details-table td {
+    border: none;
+    padding: 10px 8px;
+    /* Angepasstes Padding für Zellen */
+    text-align: center;
+    font-size: 13px;
+    /* Kleinere Schrift in der Tabelle */
+    border-bottom: 1px solid var(--color-border-subtle);
+}
+
+#details-table th {
+    /* Kopfzellen der Tabelle */
+    font-weight: 600;
+    color: var(--color-text-primary);
+    background-color: var(--color-calculated-bg);
+    /* Hintergrund für Kopfzellen */
+}
+
+#details-table tbody tr:nth-child(even) {
+    /* Zebrastreifen für bessere Lesbarkeit */
+    background-color: var(--color-table-stripe);
+}
+
+#details-table tbody tr:last-child td {
+    /* Keine untere Linie für die letzte Zeile im Body */
+    border-bottom: none;
+}
+
+#details-table tfoot td {
+    /* Fußzeile der Tabelle (Summe) */
+    border-top: 1px solid var(--color-border-subtle);
+    border-bottom: none;
+    font-weight: 600;
+    background-color: var(--color-calculated-bg);
+    text-align: center;
+}
+
+#details-table td {
+    color: var(--color-text-primary);
+}
+
+#details-table .calculated-grey-cell {
+    /* Zellen mit berechneten Werten in der Tabelle */
+    background-color: transparent;
+    /* Kein extra Hintergrund, da Zebrastreifen */
+    font-weight: 500;
+}
+
+#details-table tfoot td.number-cell {
+    /* Zahlenausrichtung in der Fußzeile */
+    text-align: center;
+}
+
+#details-table tfoot td:first-child {
+    /* Textausrichtung für "Summe:" in der Fußzeile */
+    text-align: right;
+}
+
+
+/* --- Responsive Anpassungen --- */
+@media (max-width: 600px) {
+
+    /* Anpassungen für kleinere Bildschirme */
+    body {
+        padding: 16px;
+    }
+
+    .header-container {
+        margin-bottom: 0px;
+        padding-bottom: 50px;
+        /* Mehr Platz im Header für Button auf kleineren Screens */
+    }
+
+    .print-button {
+        /* Druck-Button auf kleinen Screens anpassen */
+        top: auto;
+        /* Nicht mehr oben fixiert */
+        bottom: 10px;
+        /* Am unteren Rand des Header-Containers */
+        right: 10px;
+        /* Etwas Abstand vom Rand */
+    }
+
+    .main-content {
+        flex-direction: column;
+        /* Spalten untereinander anordnen */
+    }
+
+    .left-form,
+    .right-table-section {
+        flex: 1 1 auto;
+        min-width: unset;
+        /* Mindestbreite aufheben */
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        /* Nur eine Spalte im Raster */
+        gap: 8px 0;
+    }
+
+    label {
+        grid-column: 1 / -1;
+        /* Label über die volle Breite */
+        padding-top: 0;
+        margin-bottom: -8px;
+        /* Negativer Margin zur Kompensation */
+    }
+
+    .input-container,
+    .buttons-container {
+        grid-column: 1 / -1;
+        /* Eingabecontainer über volle Breite */
+    }
+
+    .buttons-container {
+        flex-wrap: wrap;
+        /* Buttons umbrechen lassen */
+    }
+
+    input[type="text"],
+    input[type="date"],
+    input[type="number"],
+    select {
+        grid-column: auto;
+        /* Standard-Gridverhalten für Inputs */
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    h2 {
+        font-size: 16px;
+    }
+
+    label {
+        font-size: 14px;
+    }
+
+    input,
+    select,
+    button.action-button,
+    .print-button {
+        /* Schriftgröße auch für Druck-Button anpassen */
+        font-size: 14px;
+
+    }
+
+    #details-table th,
+    #details-table td {
+        font-size: 12px;
+        /* Kleinere Schrift in der Tabelle */
+        padding: 8px 6px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    /* Weitere Anpassungen für sehr kleine Bildschirme */
+    h1 {
+        text-align: center;
+        /* Hauptüberschrift zentrieren */
+    }
+
+    #details-table th,
+    #details-table td {
+        font-size: 11px;
+        padding: 6px 4px;
+    }
+}
+
+/* --- Druckstile --- */
+@media print {
+    @page {
+        /* Seiteneinstellungen für den Druck */
+        size: A4 portrait;
+        /* A4 Hochformat */
+        margin: 1cm;
+        /* Seitenränder */
+    }
+
+    /* Klasse zum Ausblenden von Elementen im Druck */
+    .no-print {
+        display: none !important;
+    }
+
+    body {
+        font-size: 9pt;
+        /* Kleinere Schrift für den Druck */
+        color: #000;
+        background-color: #fff !important;
+        /* Weißer Hintergrund erzwingen */
+        padding: 0;
+        margin: 0;
+        -webkit-print-color-adjust: exact !important;
+        /* Farbanpassung für Webkit-Browser */
+        print-color-adjust: exact !important;
+        /* Standard Farbanpassung */
+    }
+
+    .container {
+        padding: 0;
+        margin: 0;
+        max-width: 100%;
+        box-shadow: none;
+        /* Kein Schatten im Druck */
+        border-radius: 0;
+        /* Keine abgerundeten Ecken */
+    }
+
+    .header-container {
+        /* Header im Druck anpassen */
+        border-bottom: 1px solid #000;
+        /* Dünne Linie */
+        padding-bottom: 4pt;
+        margin-bottom: 12pt;
+    }
+
+    h1 {
+        font-size: 14pt;
+        text-align: center;
+        margin-bottom: 0;
+        /* Kein Abstand unter H1 im Druck-Header */
+        border-bottom: none;
+        /* Linie vom Container */
+        padding-bottom: 0;
+    }
+
+    h2 {
+        font-size: 11pt;
+        font-weight: bold;
+        margin-top: 5pt;
+        margin-bottom: 3pt;
+        border-bottom: 1px solid #ccc;
+        /* Dezente Linie unter Zwischenüberschriften */
+        padding-bottom: 3pt;
+        page-break-after: avoid;
+        /* Seitenumbruch nach H2 vermeiden */
+    }
+
+    .main-content {
+        display: block;
+        /* Flexbox im Druck aufheben */
+        gap: 0;
+    }
+
+    .left-form {
+        /* Linker Formularbereich im Druck */
+        width: 100%;
+        min-width: unset;
+        flex: none;
+        padding-bottom: 8pt;
+        margin-bottom: 8pt;
+        page-break-inside: avoid;
+        /* Seitenumbruch innerhalb vermeiden */
+        border-bottom: 1pt solid var(--color-text-secondary);
+        /* Linie als Trenner */
+    }
+
+    .right-table-section {
+        /* Rechter Bereich mit Tabelle und Summen */
+        width: 100%;
+        min-width: unset;
+        display: grid;
+        /* Grid für Layout beibehalten */
+        grid-template-columns: 1fr 1fr;
+        /* Zweispaltiges Layout */
+        gap: 1rem;
+        margin-bottom: 8pt;
+        page-break-inside: avoid;
+    }
+
+    .flex-column-container {
+        /* Hilfscontainer für Spalten im rechten Bereich */
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-grid {
+        /* Formularraster im Druck */
+        display: grid;
+        grid-template-columns: 160px 1fr;
+        /* Feste Breite für Labels */
+        gap: 3pt 3pt;
+        /* Kleinere Abstände */
+        align-items: baseline;
+        /* An Grundlinie ausrichten */
+        margin-bottom: 1pt;
+        page-break-inside: avoid;
+    }
+
+    label {
+        grid-column: 1 / 2;
+        font-size: 9pt;
+        font-weight: bold;
+        padding-top: 0;
+        text-align: left;
+        white-space: normal;
+        /* Textumbruch für lange Labels */
+        word-wrap: break-word;
+    }
+
+    .input-container {
+        grid-column: 2 / 3;
+        display: block;
+        /* Flexbox für Input-Container aufheben */
+    }
+
+    /* Eingabefelder und Selects im Druck (als Linien darstellen) */
+    input[type="text"],
+    input[type="date"],
+    input[type="number"],
+    select {
+        grid-column: auto;
+        border: none;
+        /* Kein Rahmen */
+        border-bottom: 0.5pt dotted #666;
+        /* Gepunktete untere Linie */
+        padding: 1pt 0;
+        margin: 0;
+        font-size: 9pt;
+        height: auto;
+        background-color: transparent !important;
+        color: #000 !important;
+        border-radius: 0;
+        box-shadow: none;
+        width: auto;
+        /* Automatische Breite */
+        min-width: 80px;
+        display: inline;
+        /* Inline-Darstellung */
+        vertical-align: baseline;
+    }
+
+    select {
+        /* Spezielle Behandlung für Select-Boxen im Druck */
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-image: none;
+        /* Kein Pfeil-Icon */
+        padding-right: 0;
+        display: inline;
+        border-bottom: 0.5pt dotted #666;
+        width: auto;
+    }
+
+    select option {
+        /* Optionen ausblenden */
+        display: none;
+    }
+
+    select option[selected] {
+        /* Nur die ausgewählte Option anzeigen (funktioniert nicht in allen Browsern zuverlässig) */
+        display: inline !important;
+    }
+
+    /* Workaround für Select-Anzeige im Druck: Text über data-Attribut */
+    select::after {
+        content: attr(data-selected-text);
+        /* Zeigt den Text der ausgewählten Option an */
+        display: inline;
+        padding-left: 5px;
+        /* Kleiner Abstand */
+    }
+
+
+    .calculated-grey,
+    input[readonly] {
+        /* Schreibgeschützte Felder im Druck */
+        border: none;
+        border-bottom: 0.5pt dotted #666;
+        background-color: transparent !important;
+        color: #000 !important;
+        font-weight: normal;
+        padding: 1pt 0;
+        display: inline;
+        width: auto;
+        vertical-align: baseline;
+    }
+
+    #details-table {
+        /* Tabelle im Druck */
+        width: auto;
+        /* Automatische Breite anpassen an Inhalt */
+        margin-top: 5pt;
+        border: 1pt solid #000;
+        /* Solider Rahmen */
+        page-break-inside: auto;
+        /* Seitenumbruch innerhalb der Tabelle erlauben, wenn nötig */
+    }
+
+    #details-table th,
+    #details-table td {
+        font-size: 8pt;
+        /* Kleinere Schrift in der Tabelle */
+        padding: 1pt 2pt;
+        /* Minimales Padding */
+        border: 0.5pt solid #ccc;
+        /* Dünne Zell-Linien */
+        text-align: center;
+        vertical-align: top;
+        word-wrap: break-word;
+        /* Textumbruch in Zellen */
+    }
+
+    #details-table th {
+        font-weight: bold;
+        background-color: #eee !important;
+        /* Heller Hintergrund für Kopfzeilen */
+        color: #000 !important;
+    }
+
+    #details-table tbody tr:nth-child(even) {
+        /* Zebrastreifen im Druck entfernen */
+        background-color: transparent !important;
+    }
+
+    #details-table td.number-cell,
+    #details-table tfoot td.number-cell,
+    #details-table td.calculated-grey-cell {
+        text-align: center;
+        /* Zahlen zentriert */
+    }
+
+    #details-table tfoot td {
+        /* Fußzeile der Tabelle im Druck */
+        font-weight: bold;
+        background-color: #eee !important;
+        border-top: 1pt solid #000;
+        /* Stärkere Linie über der Summe */
+        text-align: center;
+    }
+
+    #details-table tfoot td:first-child {
+        text-align: right;
+    }
+
+
+    #details-table .calculated-grey-cell {
+        font-weight: normal;
+    }
+
+    /* Jahressummen-Bereich im Druck */
+    #jahressummen_grid {
+        margin-top: 8pt;
+        padding-top: 6pt;
+    }
+
+    #jahressummen_grid label {
+        white-space: normal;
+        /* Textumbruch für Labels */
+    }
+
+    #jahressummen_grid input {
+        min-width: 60px;
+        /* Mindestbreite für Summenfelder */
+    }
+}
+
+/* Ende der Druckstile */

@@ -1,0 +1,81 @@
+* {
+  --color-border: #c3c3c3;
+  --color-bg: #f8fafc;
+  --color-bg-hover: #f2ffe2;
+  scrollbar-width: thin;
+  scrollbar-gutter: stable;
+
+  /* scrollbar-gutter: stable; */
+  /* tailwind colors */
+  --color-primary: #1d4ed8; /*blue-700*/
+  --color-secondary: #dbeafe; /*blue-100*/
+  --color-accent: #9333ea; /*violet-600*/
+}
+
+body {
+  /* Verhindert das "Zurück"-Wischen des Browsers auf iOS */
+  overscroll-behavior-x: none;
+}
+
+/* Tabellen-Styling */
+th,
+td {
+  padding: 0.25rem;
+  text-align: center;
+  white-space: nowrap;
+  /* border: 1px solid var(--color-border); */
+}
+
+tr {
+  background-color: hsl(from var(--color-secondary) h s calc(l + 7));
+
+  &:nth-child(even) {
+    background-color: hsl(from var(--color-secondary) h s calc(l + 4));
+  }
+}
+
+td {
+  cursor: pointer;
+  transition: background-color 0.1s;
+}
+
+th {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+    sans-serif;
+  background-color: var(--color-secondary);
+  font-weight: 600;
+  position: sticky;
+  top: 0px;
+  z-index: 10;
+}
+
+/* Zeilen-Hervorhebung */
+tbody tr:hover td {
+  background-color: var(--color-bg-hover);
+}
+
+.today {
+  background-color: #ffdc6b !important;
+}
+
+.settings-section {
+  padding-bottom: 0.5rem;
+  padding-inline: 1rem;
+  border-bottom: 1px solid var(--color-border);
+  margin-block: 0.5rem;
+}
+
+/* Message Box für Benachrichtigungen */
+#message-box {
+  display: none;
+  position: fixed;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  color: white;
+  z-index: 100;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

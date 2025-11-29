@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fristenrechner</title>
+  <!-- not needed after dev-time -->
+  <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+  <link rel="stylesheet" href="tw.css" />
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" /> -->
+  <link rel="stylesheet" href="q.css" />
+  <link rel="stylesheet" href="fa.all.min.css" />
+  <link rel="shortcut icon" href="Q.png" type="image/x-png">
+</head>
+
+<body class="bg-gray-50 font-sans h-screen p-0 m-0 antialiased">
+  <!-- Hauptansicht -->
+  <div id="mainView" class="flex flex-col relative h-screen">
+    <!-- Sticky Header Container -->
+    <div class="sticky-nav-controls bg-gray-50 p-2 shadow-md border-b-1 border-gray-200 sticky top-0 z-20">
+      <div class="flex flex-row items-center justify-between space-x-3">
+        <div class="flex items-center space-x-1">
+          <button id="prevMonthButton" aria-label="Vorheriger Monat" title="Vorheriger Monat (Pfeiltaste links)"
+            class="px-6 py-2 bg-white text-blue-700 rounded-full hover:bg-blue-200 transition duration-150 shadow-md">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button id="currentMonthButton" aria-label="zu aktuellem Monat springen"
+            title="zu aktuellem Monat springen (h)"
+            class="px-3 py-2 bg-white text-blue-700 rounded-full hover:bg-blue-200 transition duration-150 shadow-md">
+            <i class="fas fa-calendar-day"></i>
+          </button>
+
+          <button id="nextMonthButton" aria-label="Nächster Monat" title="Nächster Monat (Pfeiltaste rechts)"
+            class="px-6 py-2 bg-white text-blue-700 rounded-full hover:bg-blue-200 transition duration-150 shadow-md">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+        <div id="currentMonthYear"
+          class="w-full text-base font-semibold bg-blue-100 px-3 py-2 rounded-lg min-w-[150px] text-center shadow-inner">
+          Lade...
+        </div>
+        <div class="flex items-center space-x-2">
+          <button id="settingsButton" aria-label="Einstellungen öffnen" title="Einstellungen öffnen (e)"
+            class="px-3 py-2 bg-white text-blue-700 rounded-full hover:bg-blue-200 transition duration-150 shadow-md">
+            <i class="fas fa-cog"></i>
+          </button>
+          <button id="infoButton" aria-label="Informationen" title="Informationen (i)"
+            class="px-4 py-2 bg-white text-blue-700 rounded-full hover:bg-blue-200 transition duration-150 shadow-md"
+            popovertarget="infoDialog">
+            <i class="fas fa-info"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Container für Tabellen -->
+    <div id="tablesWrapper"
+      class="flex flex-row justify-center gap-4 px-2 pb-1 border-t-[1rem] border-white bg-white text-sm font-mono overflow-x-auto min-w-max ">
+      <!-- Tabellen werden hier dynamisch eingefügt -->
+    </div>
+  </div>
+
+  <!-- Einstellungen-Ansicht -->
+  <dialog id="settingsDialog" class="overflow-auto bg-transparent max-w-2xl w-full rounded-lg">
+    <div class="bg-white px-2 relative h-full max-h-2xl">
+      <div class="absolute right-0 top-0 m-2 z-11 ">
+        <button id="resetSettingsButton" aria-label="Reset Knopf" title="auf Standardeinstellungen zurücksetzen"
+          class="px-3 py-2 bg-red-500 text-white rounded-lg shadow-sm hover:bg-red-600 transition">
+          <i class="fas fa-undo mr-2"></i>Reset
+        </button>
+      </div>
+
+      <h2 class="text-2xl font-semibold text-gray-700  bg-white mb-6 py-3 text-center  border-b">
+        <i class="fas fa-sliders-h mr-2"></i>Einstellungen
+      </h2>
+
+      <details class="settings-section">
+        <summary>Anzahl Monate</summary>
+        <p class="text-sm text-gray-600 mb-2">hier kann eingestellt werden, wie viele Monate gleichzeitig dargestellt
+          werden.</p>
+        <div>
+          <label for="displayMonthCount" class="block text-sm font-medium text-gray-700 mb-1">Anzahl der Monate
+            (1-12)</label>
+          <input type="number" id="displayMonthCount" value="1" min="1" max="12"
+            class="w-full p-3 border border-gray-300 rounded-lg shadow-sm text-center" />
+        </div>
+      </details>
+
+      <details class="settings-section">
+        <summary>Zeitraum (Startmonat)</summary>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label for="monthSelector" class="block text-sm font-medium text-gray-700 mb-1">Monat</label>
+            <select id="monthSelector" class="w-full p-3 border border-gray-300 rounded-lg shadow-sm">
+              <option value="0">Januar</option>
+              <option value="1">Februar</option>
+              <option value="2">März</option>
+              <option value="3">April</option>
+              <option value="4">Mai</option>
+              <option value="5">Juni</option>
+              <option value="6">Juli</option>
+              <option value="7">August</option>
+              <option value="8">September</option>
+              <option value="9">Oktober</option>
+              <option value="10">November</option>
+              <option value="11">Dezember</option>
+            </select>
+          </div>
+          <div>
+            <label for="yearSelector" class="block text-sm font-medium text-gray-700 mb-1">Jahr</label>
+            <select id="yearSelector" class="w-full p-3 border border-gray-300 rounded-lg shadow-sm"></select>
+          </div>
+        </div>
+      </details>
+
+      <details class="settings-section">
+        <summary>Fristen</summary>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label for="deadline1InputSettings" class="block text-sm font-medium text-gray-700 mb-1">Tage für Frist 1
+              (Q)</label>
+            <input type="number" id="deadline1InputSettings" value="19" min="1" max="99"
+              class="w-full p-3 border border-gray-300 rounded-lg shadow-sm text-center" />
+          </div>
+          <div>
+            <label for="deadline2InputSettings" class="block text-sm font-medium text-gray-700 mb-1">Tage für Frist 2
+              (Q)</label>
+            <input type="number" id="deadline2InputSettings" value="5" min="1" max="99"
+              class="w-full p-3 border border-gray-300 rounded-lg shadow-sm text-center" />
+          </div>
+        </div>
+      </details>
+
+      <details class="settings-section">
+        <summary>Wochentage</summary>
+        <p class="text-sm text-gray-600 mb-2">hier kann eingestellt werden, welche Wochentage bei der Berechnung der
+          Fristen übersprungen werden (diese werden zur eingestellten Anzahl der Arbeitstage addiert).</p>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+          <label class="flex items-center"><input type="checkbox" id="skipMonday"
+              class="mr-2 h-4 w-4" /><span>Montag</span></label>
+          <label class="flex items-center"><input type="checkbox" id="skipTuesday"
+              class="mr-2 h-4 w-4" /><span>Dienstag</span></label>
+          <label class="flex items-center"><input type="checkbox" id="skipWednesday"
+              class="mr-2 h-4 w-4" /><span>Mittwoch</span></label>
+          <label class="flex items-center"><input type="checkbox" id="skipThursday"
+              class="mr-2 h-4 w-4" /><span>Donnerstag</span></label>
+          <label class="flex items-center"><input type="checkbox" id="skipFriday"
+              class="mr-2 h-4 w-4" /><span>Freitag</span></label>
+          <label class="flex items-center"><input type="checkbox" id="skipSaturday" class="mr-2 h-4 w-4"
+              checked /><span>Samstag</span></label>
+          <label class="flex items-center"><input type="checkbox" id="skipSunday" class="mr-2 h-4 w-4"
+              checked /><span>Sonntag</span></label>
+        </div>
+      </details>
+
+      <details class="settings-section">
+        <summary>Feiertage</summary>
+        <p class="text-sm text-gray-600 mb-2">hier kann eingestellt werden, welche Feiertage bei der Berechnung der
+          Fristen übersprungen werden (diese werden zur eingestellten Anzahl der Arbeitstage addiert).</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <label class="flex items-center"><input type="checkbox" id="skipNewYear" class="mr-2 h-4 w-4"
+              checked /><span>Neujahr (1.1.)</span></label>
+          <label class="flex items-center"><input type="checkbox" id="skipGoodFriday" class="mr-2 h-4 w-4"
+              checked /><span>Karfreitag</span></label>
+          <label class="flex items-center"><input type="checkbox" id="skipEasterMonday" class="mr-2 h-4 w-4"
+              checked /><span>Ostermontag</span></label>
+          <label class="flex items-center"><input type="checkbox" id="skipLabourDay" class="mr-2 h-4 w-4"
+              checked /><span>Tag d. Arbeit (1.5.)</span></label>
+          <label class="flex items-center"><input type="checkbox" id="skipAscension" class="mr-2 h-4 w-4"
+              checked /><span>Chr. Himmelfahrt</span></label>
+          <label class="flex items-center"><input type="checkbox" id="skipPentecostMonday" class="mr-2 h-4 w-4"
+              checked /><span>Pfingstmontag</span></label>
+          <label class="flex items-center"><input type="checkbox" id="skipUnityDay" class="mr-2 h-4 w-4"
+              checked /><span>Tag d. D. Einheit (3.10.)</span></label>
+          <label class="flex items-center"><input type="checkbox" id="skipReformationDay" class="mr-2 h-4 w-4"
+              checked /><span>Reformationstag (31.10.)</span></label>
+          <label class="flex items-center"><input type="checkbox" id="skipChristmasEve"
+              class="mr-2 h-4 w-4" /><span>Heiligabend (24.12.)</span></label>
+          <label class="flex items-center"><input type="checkbox" id="skipChristmasDay" class="mr-2 h-4 w-4"
+              checked /><span>1. Weihnachtstag</span></label>
+          <label class="flex items-center"><input type="checkbox" id="skipBoxingDay" class="mr-2 h-4 w-4"
+              checked /><span>2. Weihnachtstag</span></label>
+          <label class="flex items-center"><input type="checkbox" id="skipNewYearsEve"
+              class="mr-2 h-4 w-4" /><span>Silvester (31.12.)</span></label>
+        </div>
+      </details>
+
+      <details class="settings-section">
+        <summary>Fristverkürzung durch Feiertage</summary>
+        <p class="text-sm text-gray-600 mb-2">Fällt eine Frist auf einen hier ausgewählten Feiertag, wird sie auf den
+          vorherigen Arbeitstag zurückdatiert. Es werden nur Feiertage angezeigt, die oben nicht zum Überspringen
+          ausgewählt sind.</p>
+        <div id="shortenHolidaysContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <!-- Checkboxen werden dynamisch eingefügt -->
+        </div>
+      </details>
+
+      <details class="settings-section">
+        <summary>Datumsformat</summary>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div>
+            <label for="formatCurrentDate" class="block text-sm font-medium text-gray-700 mb-1">Aktuelles
+              Datum</label>
+            <select id="formatCurrentDate" class="w-full p-2 border border-gray-300 rounded-md">
+              <option value="iso">ISO (JJMMTT)</option>
+              <option value="normal" selected>Normal (TT.MM.JJJJ)</option>
+            </select>
+          </div>
+          <div>
+            <label for="formatDeadline1" class="block text-sm font-medium text-gray-700 mb-1">Frist 1</label>
+            <select id="formatDeadline1" class="w-full p-2 border border-gray-300 rounded-md">
+              <option value="iso" selected>ISO (JJMMTT)</option>
+              <option value="normal">Normal (TT.MM.JJJJ)</option>
+            </select>
+          </div>
+          <div>
+            <label for="formatDeadline2" class="block text-sm font-medium text-gray-700 mb-1">Frist 2</label>
+            <select id="formatDeadline2" class="w-full p-2 border border-gray-300 rounded-md">
+              <option value="iso" selected>ISO (JJMMTT)</option>
+              <option value="normal">Normal (TT.MM.JJJJ)</option>
+            </select>
+          </div>
+        </div>
+      </details>
+
+      <details class="settings-section">
+        <summary>Kopie-Einstellungen</summary>
+        <p class="text-sm text-gray-600 mb-2">hier kann eingestellt werden, ob Texte vor oder nach dem kopierten Text
+          angehängt werden sollen. Bitte auch eventuelle Trennzeichen (z.B. Leerzeichen) vor oder nach dem jeweiligen
+          Text beachten.</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label for="copyPrefix" class="block text-sm font-medium text-gray-700 mb-1">Präfix</label>
+            <input type="text" id="copyPrefix" value="" placeholder="z.B. 'Frist: '"
+              class="w-full p-3 border border-gray-300 rounded-lg shadow-sm" />
+          </div>
+          <div>
+            <label for="copySuffix" class="block text-sm font-medium text-gray-700 mb-1">Suffix</label>
+            <input type="text" id="copySuffix" value=" Q1 "
+              class="w-full p-3 border border-gray-300 rounded-lg shadow-sm" />
+          </div>
+        </div>
+      </details>
+
+      <details class="settings-section">
+        <summary>Einstellungen teilen</summary>
+        <p class="text-sm text-gray-600 mb-2">Erstellt einen Link, der die aktuellen, vom Standard abweichenden
+          Einstellungen enthält. Dieser Link kann geteilt werden, um die gleichen Einstellungen auf einem anderen
+          Gerät
+          zu verwenden.
+        </p>
+
+        <div>
+          <label for="exportSettingsLink" class="block text-sm font-medium text-gray-700 mb-1">Link</label>
+          <input type="text" id="exportSettingsLink" value="" placeholder="Link" readonly
+            class="w-full p-3 mb-2 border border-gray-300 rounded-lg shadow-sm" />
+        </div>
+
+        <div class="flex flex-col space-y-2">
+          <button id="exportSettingsButton"
+            class="px-3 py-2 bg-green-600 text-white rounded-lg shadow-sm hover:bg-green-700 transition">
+            <i class="fas fa-link mr-2"></i>Link generieren & kopieren
+          </button>
+        </div>
+      </details>
+
+      <div class="flex flex-row justify-end space-x-2 bg-white mt-3 z-10 w-full p-2">
+        <button id="closeSettingsButton" aria-label="Speichern und Schließen Knopf"
+          class="px-3 py-2 bg-blue-600 text-white rounded-lg shadow-sm hover:bg-blue-700 transition">
+          <i class="fas fa-check mr-2"></i>Speichern & Schließen
+        </button>
+        <button id="cancelSettingsButton" aria-label="Abbrechen Knopf" autofocus
+          class="px-3 py-2 bg-blue-600 text-white rounded-lg shadow-sm hover:bg-blue-700 transition">
+          Abbrechen (Esc)
+        </button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Message Container -->
+  <div id="message-box"
+    class="fixed top-8 left-1/2 -translate-x-1/2 px-8 py-4 rounded-lg text-white z-50 text-center shadow-lg">
+  </div>
+
+  <!-- Details & Info -->
+  <div popover="auto" id="detailsDialog"
+    class="p-6 rounded-xl shadow-2xl backdrop:bg-black/50 w-full max-w-sm border border-gray-200">
+    <header class="mb-4 pb-2 border-b border-gray-300">
+      <h3 id="details-title" class="text-xl font-semibold text-gray-800 text-center">Fristendetails</h3>
+    </header>
+    <pre id="details-content" class="bg-blue-100 p-3 rounded-md border-2 border-gray-200 "></pre>
+    <footer class="flex justify-center mt-6 pt-4 border-t border-gray-300">
+      <button id="detailsCloseButton" popovertarget="detailsDialog" popovertargetaction="hide"
+        class="px-6 py-2 bg-blue-600 text-white font-medium rounded-lg shadow-md hover:bg-blue-700">
+        Schließen (Esc)
+      </button>
+    </footer>
+  </div>
+
+  <div popover="auto" id="infoDialog"
+    class="p-6 rounded-xl shadow-2xl backdrop:bg-black/50 w-full max-w-sm border border-gray-200">
+    <header class="mb-4 pb-2 border-b border-gray-300">
+      <h3 id="info-title" class="text-xl font-semibold text-gray-800 text-center">Fristenrechner 📅</h3>
+    </header>
+
+    <div id="info-content" class="text-sm space-y-2">
+      <p class="flex items-center justify-center text-center py-1">
+        Die Anwendung ist eine Web-App zur Berechnung von Fristen
+        basierend auf Arbeitstagen unter Berücksichtigung von
+        Wochenenden und Feiertagen.
+      </p>
+      <h4 id="info-title" class="text-lg text-black text-center">Kurzbefehle</h4>
+      <p class="flex items-center justify-center py-1">
+        <i class="fas fa-mouse-pointer mr-2 w-4 text-blue-500"></i>
+        <span class="font-medium">Doppelklick:&nbsp;</span> Zelle kopieren
+      </p>
+      <p class="flex items-center justify-center py-1">
+        <i class="fas fa-mouse-pointer mr-2 w-4 text-blue-500"></i>
+        <span class="font-medium">Rechtsklick:&nbsp;</span> Details anzeigen
+      </p>
+      <p class="flex items-center justify-center py-1">
+        <i class="fas fa-arrows-alt-h mr-2 w-4 text-blue-500"></i>
+        <span class="font-medium">Pfeiltasten:&nbsp;</span> Monat wechseln
+      </p>
+      <p class="flex items-center justify-center py-1">
+        <i class="fas fa-plus-minus mr-2 w-4 text-blue-500"></i>
+        <span class="font-medium">"+" oder "-":&nbsp;</span> Monat hinzufügen oder löschen
+      </p>
+    </div>
+
+    <footer class="flex justify-center mt-6 pt-4 border-t border-gray-300">
+      <button id="infoCloseButton"
+        class="px-6 py-2 bg-blue-600 text-white font-medium rounded-lg shadow-md hover:bg-blue-700"
+        popovertarget="infoDialog" popovertargetaction="hide">
+        Schließen (Esc)
+      </button>
+    </footer>
+  </div>
+
+  <script type="module" src="./js/app.js"></script>
+
+</body>
+
+</html>

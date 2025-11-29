@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/BA-Logo-white-circle.png" type="image/x-icon">
+    <title>Amtshilfe</title>
+    <!-- Tailwind CSS -->
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./tw.css">
+
+
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                        secondary: '#475569',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="min-h-screen flex flex-col">
+
+    <!-- Sticky Header -->
+    <header
+        class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div id="logo" class="flex flex-shrink-0 flex items-center gap-2 cursor-pointer select-none">
+                    <!-- <span class="text-3xl">🧰</span> -->
+                    <img src="../img/BA-Logo-white-circle.svg" class="max-w-8" alt=""></img>
+                    <span class="font-bold text-xl tracking-tight text-slate-800">Amtshilfe
+                        <span class="text-primary">Hub</span>
+                    </span>
+                </div>
+
+                <!-- Status -->
+                <div class="flex items-center">
+                    <!-- Platzhalter für Status, falls benötigt -->
+                </div>
+            </div>
+
+            <!-- Tags Navigation -->
+            <div class="p-2 border-t border-slate-100 overflow-x-auto no-scrollbar flex flex-wrap items-center gap-2"
+                id="tagsContainer">
+                <!-- Tags via JS -->
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow pt-32 pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+        <!-- Grid -->
+        <div id="toolsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Cards via JS -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="emptyState" class="hidden flex flex-col items-center justify-center py-20 text-center">
+            <span class="text-6xl mb-4 grayscale opacity-50">👻</span>
+            <h3 class="text-lg font-medium text-slate-900">Keine Tools gefunden</h3>
+            <p class="text-slate-500 max-w-sm mt-2">Wir konnten keine Tools für deine Suche oder den ausgewählten Tag
+                finden.</p>
+            <button id="resetBtn"
+                class="mt-6 px-4 py-2 bg-white border border-slate-300 rounded-md text-sm font-medium text-slate-700 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                Filter zurücksetzen
+            </button>
+        </div>
+    </main>
+
+    <footer id="footer"
+        class="fixed bottom-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-t border-slate-200 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+            <!-- Footer-Suche -->
+            <div id="footerSearchContainer" class="relative ">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none select-none">
+                    <span>🔍</span>
+                </div>
+                <input type="text" id="footerSearchInput" placeholder="Suche..."
+                    class="block w-full pl-10 pr-3 py-2 border border-slate-200 rounded-full leading-5 bg-slate-50 placeholder-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-primary focus:border-primary sm:text-sm transition-all duration-300">
+            </div>
+
+            <!-- "Externe Tools laden" Button -->
+            <button id="loadExtraBtn"
+                class="flex-shrink-0 flex items-center gap-2 px-5 py-2 bg-slate-800 text-white rounded-full hover:bg-slate-700 transition-colors shadow-sm text-sm font-medium">
+                <span>☁️</span> Externe Tools laden
+            </button>
+
+        </div>
+    </footer>
+
+    <script type="module" src="./app.js"></script>
+</body>
+
+</html>

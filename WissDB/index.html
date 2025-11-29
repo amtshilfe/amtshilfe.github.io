@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="./assets/img/bulb.svg">
+    <link rel="shortcut icon" href="../assets/img/bulb.svg" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WissDB - deine Wissensdatenbank</title>
+    <link rel="stylesheet" href="./assets/styles/style.css">
+    <!-- Google Fonts for symbols-->
+    <link rel="stylesheet" href="./assets/styles/material-icons.css">
+    <!-- Markdown Parser -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/15.0.6/marked.min.js"></script>
+    <!-- XSS-Schutz -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.2.3/purify.min.js"></script>
+
+</head>
+
+<body>
+    <header>
+        <!-- <logo class="logo material-emoticon">💡</logo> -->
+        <img src="./assets/img/bulb.svg" alt="WissDB-Logo" class="logo">
+        <h1>WissDB</h1>
+        <div id="top-tools">
+            <actionIcon id="addButton" title="neuer Eintrag" class="material-icons-outlined"> add </actionIcon>
+            <actionIcon id="toTop" title="zum Seitenanfang springen" class="material-icons-outlined"> arrow_upward
+            </actionIcon>
+            <actionIcon id="toBottom" title="zum Seitenende springen" class="material-icons-outlined">
+                arrow_downward
+            </actionIcon>
+            <actionIcon id="toggleFilterMenu" title="Filter ein/ausblenden" class="material-icons-outlined ">
+                search </actionIcon>
+            <actionIcon id="settings-link" title="Menü" class="material-icons-outlined "> settings </actionIcon>
+        </div>
+    </header>
+
+    <!-- Dialog für Filter -->
+    <div id="filterContainer" class="hidden">
+        <div class="sort-controls" id="sortControls">
+            <button type="button" id="toggleTagSortName">Name <span class="material-icons-outlined">sort</span></button>
+            <button type="button" id="toggleTagSortCount">Häufigkeit <span
+                    class="material-icons-outlined">sort</span></button>
+            <div id="searchBox" class="">
+                <label for="searchText"></label>
+                <input type="text" id="searchText" placeholder="Suchtext">
+                <actionIcon id="buttonSearch" class="material-icons-outlined ">search</actionIcon>
+            </div>
+            <div>
+                <actionIcon id="deleteFilter" class="material-icons-outlined">filter_alt_off</actionIcon>
+            </div>
+        </div>
+        <div id="selectedTagList" class="tagList"></div>
+        <div id="tagList" class="tagList"></div>
+        <div class="actions-right">
+            <button type="button" id="closeFilterMenu" class="danger">✖ Schließen</button>
+        </div>
+    </div>
+    <div class="container">
+        <div id="entries" class="entries-grid"></div>
+    </div>
+
+    <!-- Modal Dialog für Eintragsbearbeitung -->
+    <div id="entryModal" class="modal">
+        <div class="modal-content">
+            <div class="form-group">
+                <label for="title">Titel:</label>
+                <input type="text" id="title" placeholder="Titel des Eintrags" required>
+            </div>
+            <div class="form-group">
+                <label for="content">Inhalt (Markdown unterstützt):</label>
+                <textarea id="content" placeholder="**Fett**, *Kursiv*, `Code`, ```Codeblock```, [Links](https://...)"
+                    rows="5" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="tags">Stichwörter (kommagetrennt):</label>
+                <input type="text" id="tags" placeholder="z.B. Projekt, Dokumentation, Idee">
+            </div>
+            <div class="actions-right">
+                <button type="button" id="saveButton" class="success">Speichern</button>
+                <button type="button" id="cancelButton" class="danger">Abbrechen</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal-Dialog für Settings -->
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <h3>Datenbank-Aktionen</h3>
+            <div id="importExport">
+                <button type="button" id="exportButton" title="alle Einträge exportieren">💾Exportieren</button>
+                <label class="custom-file-upload" title="Einträge importieren">
+                    <input type="file" id="importFile" accept=".json">
+                    <span>📁Importieren</span>
+                </label>
+                <button type="button" id="deleteDBButton" class="button-delete">✖ Datenbank löschen</button>
+            </div>
+        </div>
+        <div class="modal-content">
+            <h3>Einstellungen</h3>
+            <div class="form-group">
+                <label for="syncPath">Sync-Pfad: </label>
+                <div class="flex-row">
+                    <input type="text" id="syncPath" readonly>
+                    <actionIcon id="buttonSelectSyncFile" class="material-icons-outlined">folder</actionIcon>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="syncInterval">Sync-Intervall (Minuten):
+                    <input type="number" id="syncInterval" min="1" value="5"></label>
+            </div>
+            <div class="actions-right">
+                <button type="button" id="buttonSaveSettings" class="success">Speichern</button>
+                <button type="button" id="buttonCloseSettings" class="danger">Schließen</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="./assets/js/app.js" type="module"></script>
+</body>
+
+</html>

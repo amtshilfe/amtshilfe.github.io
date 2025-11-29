@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kompakte Ziffernprüfung</title>
+    <!-- Lade Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Konfigurieren der Inter-Schriftart */
+        :root {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Definiert die Farbe für abweichende Zeichen */
+        .diff {
+            color: #ef4444;
+            /* tailwind red-500 */
+            font-weight: bold;
+            background-color: #fee2e2;
+            /* tailwind red-100 */
+            padding: 0 1px;
+            border-radius: 4px;
+        }
+
+        /* Stellt sicher, dass das pre-Element den Weißraum bewahrt, insbesondere Leerzeichen */
+        #controlArea1,
+        #controlArea2 {
+            white-space: pre;
+            font-family: monospace;
+            /* Monospaced Schriftart für perfekte Ausrichtung */
+        }
+
+        /* Tooltip Style (Info Text beim Hover) */
+        .tooltip-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip-text {
+            visibility: hidden;
+            width: 450px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 10px;
+            position: absolute;
+            z-index: 10;
+            top: 10px;
+            /* Position über dem "i" */
+            right: 10px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.875rem;
+        }
+
+        .tooltip-container:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gray-50 min-h-screen p-2 "> <!-- Reduzierter Abstand zum Body -->
+
+    <div class="max-w-3xl mx-auto bg-white shadow-sm rounded-xl p-4 "> <!-- Reduzierter Container-Abstand -->
+
+        <!-- Überschrift mit Info-Symbol -->
+        <div class="flex items-center justify-between mb-4"> <!-- Reduzierter Abstand -->
+            <h1 class="text-xl font-extrabold text-gray-800">Ziffernprüfung (String-Vergleich)</h1>
+            <!-- Kleinere Überschrift -->
+            <div class="tooltip-container">
+                <!-- Symbolisches "i" SVG -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-500 hover:text-blue-700 cursor-help"
+                    fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span class="tooltip-text">Geben Sie zwei Texte ein, um sie zu vergleichen. Nicht sichtbare Zeichen
+                    (Leerzeichen etc.) werden automatisch entfernt. </br>
+                    Der Kontrollbereich zeigt die Daten in 4er-Blöcken mit visueller Hervorhebung der
+                    Unterschiede.</span>
+            </div>
+        </div>
+
+        <div class="space-y-3">
+
+            <!-- Eingabefeld 1 (einzeilig) -->
+            <div>
+                <label for="input1" class="block text-xs font-medium text-gray-700 mb-1">Text 1:</label>
+                <input type="text" id="input1"
+                    class="w-full p-1.5 border border-gray-300 rounded-lg text-sm focus:ring-blue-500 focus:border-blue-500 text-gray-800"
+                    oninput="compareStrings()">
+            </div>
+
+            <!-- Eingabefeld 2 (einzeilig) -->
+            <div>
+                <label for="input2" class="block text-xs font-medium text-gray-700 mb-1">Text 2:</label>
+                <input type="text" id="input2"
+                    class="w-full p-1.5 border border-gray-300 rounded-lg text-sm focus:ring-blue-500 focus:border-blue-500 text-gray-800"
+                    oninput="compareStrings()">
+            </div>
+
+            <!-- Ergebnis-Nachricht, immer sichtbar, wenn Strings eingegeben wurden -->
+            <div id="resultMessage" class="pt-2">
+                <!-- Wird dynamisch gefüllt -->
+            </div>
+
+            <!-- Kontrollbereich (Anzeige der formatierten Strings) - Wird nur bei Unterschieden eingeblendet -->
+            <div id="controlWrapper" class="mt-2 pt-2 border-t border-gray-200 hidden">
+                <h2 class="text-sm font-semibold text-gray-800 mb-2">Kontrollansicht (Abweichungen)</h2>
+
+                <!-- Kontrollstring 1 -->
+                <div class="bg-gray-100 p-2 rounded-lg shadow-inner mb-2 overflow-x-auto">
+                    <p class="text-xs font-semibold text-gray-600 mb-1">Bereinigt 1:</p>
+                    <pre id="controlArea1" class="text-sm text-gray-800"></pre>
+                </div>
+
+                <!-- Kontrollstring 2 -->
+                <div class="bg-gray-100 p-2 rounded-lg shadow-inner overflow-x-auto">
+                    <p class="text-xs font-semibold text-gray-600 mb-1">Bereinigt 2:</p>
+                    <pre id="controlArea2" class="text-sm text-gray-800"></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Set up references to the input and output elements
+        const input1 = document.getElementById('input1');
+        const input2 = document.getElementById('input2');
+        const controlArea1 = document.getElementById('controlArea1');
+        const controlArea2 = document.getElementById('controlArea2');
+        const resultMessage = document.getElementById('resultMessage');
+        const controlWrapper = document.getElementById('controlWrapper');
+
+        /**
+         * Cleans the input string by removing all whitespace (including newlines)
+         * and converts it to uppercase.
+         * @param {string} str - The raw input string.
+         * @returns {string} The cleaned string.
+         */
+        function cleanString(str) {
+            // Remove all whitespace (spaces, tabs, newlines, etc.)
+            // and convert to uppercase for case-insensitive comparison
+            return str.replace(/\s/g, '').toUpperCase();
+        }
+
+        /**
+         * Compares the two cleaned strings character by character and generates
+         * HTML to display the formatted strings with differences highlighted.
+         */
+        function compareStrings() {
+            const raw1 = input1.value;
+            const raw2 = input2.value;
+
+            // 1. Clean the strings
+            const cleaned1 = cleanString(raw1);
+            const cleaned2 = cleanString(raw2);
+
+            // Determine the length of the string to compare (the longer one)
+            const maxLength = Math.max(cleaned1.length, cleaned2.length);
+
+            let formattedHTML1 = '';
+            let formattedHTML2 = '';
+            let differencesFound = false;
+
+            for (let i = 0; i < maxLength; i++) {
+                const char1 = cleaned1[i] || ' '; // Use a space if the string is shorter
+                const char2 = cleaned2[i] || ' ';
+
+                let isDiff = false;
+
+                // Check for difference.
+                if (char1 !== char2) {
+                    isDiff = true;
+                    differencesFound = true;
+                }
+
+                // Format: Add a space every 4 characters in the *cleaned* string
+                const spaceBeforeBlock = (i > 0 && i % 4 === 0) ? ' ' : '';
+
+                // Apply highlighting for differences
+                const classStart = isDiff ? '<span class="diff">' : '';
+                const classEnd = isDiff ? '</span>' : '';
+
+                // Append the character (and the preceding space if applicable) with highlighting
+                formattedHTML1 += spaceBeforeBlock + classStart + (char1 === ' ' ? '&nbsp;' : char1) + classEnd;
+                formattedHTML2 += spaceBeforeBlock + classStart + (char2 === ' ' ? '&nbsp;' : char2) + classEnd;
+            }
+
+            // 3. Update the Control Area content
+            // If the string is empty, use a non-breaking space to ensure the pre-tag is visible
+            controlArea1.innerHTML = formattedHTML1.trim() || '&nbsp;';
+            controlArea2.innerHTML = formattedHTML2.trim() || '&nbsp;';
+
+            // 4. Update the Result Message and Control Wrapper Visibility
+            const empty1 = cleaned1.length === 0;
+            const empty2 = cleaned2.length === 0;
+
+            // Initial styling for the result message container (always a div)
+            resultMessage.innerHTML = '';
+
+            if (empty1 || empty2) {
+                // wenn ein Feld leer: Nichts anzeigen
+                controlWrapper.classList.add('hidden');
+            } else if (!differencesFound && !empty1 && !empty2) {
+                // Identisch und beide nicht leer: Erfolgsmeldung anzeigen, Kontrollansicht verstecken
+                resultMessage.innerHTML = `<div class="p-2 rounded-lg text-sm font-medium bg-green-500 text-white">
+                                                Strings sind IDENTISCH.
+                                            </div>`;
+                controlWrapper.classList.add('hidden');
+            } else if (differencesFound) {
+                // Unterschiede gefunden: Warnmeldung anzeigen, Kontrollansicht EINBLENNDEN
+                resultMessage.innerHTML = `<div class="p-2 rounded-lg text-sm font-medium bg-red-500 text-white">
+                                                ACHTUNG: UNTERSCHIEDE gefunden.
+                                            </div>`;
+                controlWrapper.classList.remove('hidden');
+            } else {
+                // Einer leer, der andere nicht: Blaue Aufforderung anzeigen, Kontrollansicht verstecken
+                resultMessage.innerHTML = `<div class="p-2 rounded-lg text-sm font-medium bg-blue-500 text-white">
+                                                Geben Sie den zweiten String zum Vergleich ein.
+                                            </div>`;
+                controlWrapper.classList.add('hidden');
+            }
+        }
+
+        // Initial call to set up the view
+        compareStrings();
+    </script>
+</body>
+
+</html>
